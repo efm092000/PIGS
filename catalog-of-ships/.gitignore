@@ -11,9 +11,6 @@
 npm-debug.log
 yarn-error.log
 
-#ENV keys
-.catalog-of-ships/src/environments/*
-
 # IDEs and editors
 .idea/
 .project
@@ -22,6 +19,7 @@ yarn-error.log
 *.launch
 .settings/
 *.sublime-workspace
+/src/environments/*
 
 # Visual Studio Code
 .vscode/*
