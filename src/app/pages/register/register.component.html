@@ -1,0 +1,26 @@
+<div class="register-container">
+  <div class="register-header">
+    <button routerLink="/login">INICIAR SESIÓN</button>
+    <button class="active">REGISTRAR</button>
+  </div>
+  <form (ngSubmit)="register()">
+    <label for="username">NOMBRE DE USUARIO</label>
+    <input type="text" id="username"  name="username" required>
+    
+    <label for="email">CORREO ELECTRÓNICO</label>
+    <input type="email" id="email"  name="email" required>
+    
+    <label for="password">CONTRASEÑA</label>
+    <input type="password" id="password"  name="password" required>
+    
+    <label for="confirmPassword">CONFIRMAR CONTRASEÑA</label>
+    <input type="password" id="confirmPassword"  name="confirmPassword" required>
+    
+    <div class="remember-me">
+      <input type="checkbox" id="rememberMe"  name="rememberMe">
+      <label for="rememberMe">RECORDAR CONTRASEÑA</label>
+    </div>
+    
+    <button type="submit">ACCEDER</button>
+  </form>
+</div>

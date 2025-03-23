@@ -12,7 +12,7 @@
   "dependencies": {
     "@angular/common": "^19.2.0",
     "@angular/compiler": "^19.2.0",
-    "@angular/core": "^19.2.0",
+    "@angular/core": "^19.2.3",
     "@angular/fire": "^19.0.0",
     "@angular/forms": "^19.2.0",
     "@angular/platform-browser": "^19.2.0",
@@ -20,7 +20,7 @@
     "@angular/router": "^19.2.0",
     "@firebasegen/default-connector": "file:dataconnect-generated/js/default-connector",
     "rxjs": "~7.8.0",
-    "tslib": "^2.3.0",
+    "tslib": "^2.8.1",
     "zone.js": "~0.15.0"
   },
   "devDependencies": {
