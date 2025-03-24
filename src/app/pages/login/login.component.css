@@ -1,19 +1,29 @@
-.login-container {
+.row {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.container {
   background-color: white;
   padding: 20px;
   border-radius: 10px;
   width: 300px;
-  margin: auto;
   text-align: center;
 }
 
-.login-header {
+.form-box {
+  position: relative;
+}
+
+.button-box {
   display: flex;
   justify-content: space-around;
   margin-bottom: 20px;
 }
 
-.login-header button {
+.toggle-btn {
   background-color: #d3d3d3;
   border: none;
   padding: 10px 20px;
@@ -21,21 +31,16 @@
   cursor: pointer;
 }
 
-.login-header button.active {
+.toggle-btn.active {
   background-color: #b0c4de;
 }
 
-form {
+.input-group {
   display: flex;
   flex-direction: column;
 }
 
-label {
-  margin: 10px 0 5px;
-}
-
-input[type="text"],
-input[type="password"] {
+.input-field {
   padding: 10px;
   margin-bottom: 10px;
   border: 1px solid #ccc;
@@ -52,7 +57,7 @@ input[type="password"] {
   margin-right: 10px;
 }
 
-button[type="submit"] {
+.submit-btn {
   background-color: #b0c4de;
   border: none;
   padding: 10px;
