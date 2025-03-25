@@ -10,5 +10,11 @@
   "firestore": {
     "rules": "firestore.rules",
     "indexes": "firestore.indexes.json"
+<<<<<<< HEAD
+=======
+  },
+  "storage": {
+    "rules": "storage.rules"
+>>>>>>> 2f7af4f04e743ffbb5c04ee70419cdcb93700e21
   }
 }

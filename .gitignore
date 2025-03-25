@@ -7,10 +7,16 @@
 /bazel-out
 
 # Node
-/node_modules
+catalog-of-ships/node_modules
 npm-debug.log
 yarn-error.log
 
+<<<<<<< HEAD
+=======
+#ENV keys
+catalog-of-ships/src/environments/*
+
+>>>>>>> 2f7af4f04e743ffbb5c04ee70419cdcb93700e21
 # IDEs and editors
 .idea/
 .project

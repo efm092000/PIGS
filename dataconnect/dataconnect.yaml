@@ -1,5 +1,9 @@
 specVersion: "v1beta"
+<<<<<<< HEAD
 serviceId: "catalog-of-ships"
+=======
+serviceId: "pigs"
+>>>>>>> 2f7af4f04e743ffbb5c04ee70419cdcb93700e21
 location: "us-central1"
 schema:
   source: "./schema"
@@ -7,6 +11,10 @@ schema:
     postgresql:
       database: "fdcdb"
       cloudSql:
+<<<<<<< HEAD
         instanceId: "catalog-of-ships-fdc"
+=======
+        instanceId: "pigs-fdc"
+>>>>>>> 2f7af4f04e743ffbb5c04ee70419cdcb93700e21
       # schemaValidation: "COMPATIBLE"
 connectorDirs: ["./connector"]
