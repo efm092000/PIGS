@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-register',
@@ -11,18 +10,12 @@ export class RegisterComponent {
   email: string = '';
   password: string = '';
   confirmPassword: string = '';
-  rememberMe: boolean = false;
-
-  constructor(private router: Router) { }
 
   register() {
-    // Implement registration logic here
-    // For now, just navigate to the homepage
-    this.router.navigate(['/homepage']);
-  }
-
-  login() {
-    // Navigate to the login page
-    this.router.navigate(['/login']);
+    if (this.password !== this.confirmPassword) {
+      alert('Passwords do not match');
+      return;
+    }
+    console.log('Registering user:', this.username, this.email);
   }
 }

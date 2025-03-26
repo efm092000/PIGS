@@ -1,28 +1,20 @@
-<div class="row">
-  <div class="container col-md-auto">
-    <div class="form-box">
-      <div class="button-box">
-        <div id="elegir"></div>
-        <button type="button" class="toggle-btn" (click)="toggleForm()">{{ isLogin ? 'LOG IN' : 'SIGN UP' }}</button>
-      </div>
-
-      <form id="login" class="input-group" *ngIf="isLogin" (ngSubmit)="login()">
-        <input type="text" class="input-field" [(ngModel)]="username" name="username" placeholder="USERNAME" required>
-        <input type="password" class="input-field" [(ngModel)]="password" name="password" placeholder="PASSWORD" required>
-        <div class="remember-me">
-          <input type="checkbox" id="rememberMe" [(ngModel)]="rememberMe" name="rememberMe">
-          <label for="rememberMe">REMEMBER PASSWORD</label>
-        </div>
-        <button type="submit" class="submit-btn">ACCEPT</button>
-      </form>
-
-      <form id="register" class="input-group" *ngIf="!isLogin" (ngSubmit)="signup()">
-        <input type="text" class="input-field" [(ngModel)]="username" name="username" placeholder="USERNAME" required>
-        <input type="text" class="input-field" [(ngModel)]="email" name="email" placeholder="EMAIL" required>
-        <input type="password" class="input-field" [(ngModel)]="password" name="password" placeholder="PASSWORD" required>
-        <input type="password" class="input-field" [(ngModel)]="confirmPassword" name="confirmPassword" placeholder="CONFIRM PASSWORD" required>
-        <button type="submit" class="submit-btn">SIGN UP</button>
-      </form>
-    </div>
+<div class="auth-container">
+  <div class="auth-header">
+    <button class="active">LOGIN</button>
+    <button routerLink="/register">SIGN UP</button>
   </div>
+  <form (ngSubmit)="login()">
+    <label for="email">EMAIL</label>
+    <input type="email" id="email" name="email"  required>
+
+    <label for="password">PASSWORD</label>
+    <input type="password" id="password" name="password"  required>
+
+    <div class="remember-me">
+      <input type="checkbox" id="rememberMe" name="rememberMe">
+      <label for="rememberMe">REMEMBER ME</label>
+    </div>
+
+    <button type="submit">LOG IN</button>
+  </form>
 </div>
