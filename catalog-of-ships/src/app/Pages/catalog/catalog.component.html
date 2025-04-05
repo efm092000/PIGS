@@ -1,0 +1,18 @@
+<body class="bg-[#E1E1E1] h-screen">
+    <div>
+        <app-search (searchChanged)="onSearchChanged($event)"></app-search>
+    </div>
+    <div class="grid grid-cols-4 gap-4 p-4">
+        <div *ngFor="let item of filteredImages let i = index" class="bg-gray-400 p-4 rounded-lg shadow-md">
+          <img 
+            [src]="item.imagen" 
+            [alt]="item.nombre" 
+            class="w-full h-32 object-cover rounded-lg"
+          />
+          <span class="text-xl text-black flex justify-center mt-2">{{ item.nombre }}</span>
+          <div class="flex justify-center mt-2">
+            <app-star [starId]="'star-' + i"></app-star>
+          </div>
+        </div>
+      </div>
+</body>
