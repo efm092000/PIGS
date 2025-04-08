@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { AuthService } from '../../services/auth.service';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 
@@ -11,32 +10,19 @@ import { CommonModule } from '@angular/common';
   styleUrls: ['./register.component.css'],
 })
 export class RegisterComponent {
-  email = '';
-  password = '';
-  confirmPassword = '';
-  errorMessage = '';
+  email: string = '';
+  password: string = '';
+  confirmPassword: string = '';
+  errorMessage: string = '';
 
-  constructor(private authService: AuthService, private router: Router) {}
+  constructor(private router: Router) {}
+
+  navigateToLogin() {
+    this.router.navigate(['/login']);
+  }
 
   register() {
-    if (this.password !== this.confirmPassword) {
-      this.errorMessage = 'Passwords do not match!';
-      return;
-    }
-
-    if (this.email && this.password) {
-      this.authService
-        .register(this.email, this.password)
-        .then((userCredential) => {
-          console.log('User registered:', userCredential);
-          this.router.navigate(['/home']);
-        })
-        .catch((error) => {
-          this.errorMessage = error.message;
-          console.error('Registration failed:', error);
-        });
-    } else {
-      this.errorMessage = 'Please enter both email and password';
-    }
+    // Lógica para registrar al usuario
+    console.log('User registered:', this.email, this.password);
   }
 }
