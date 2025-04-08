@@ -1,0 +1,13 @@
+<!-- Content for authenticated users -->
+<div *ngIf="isAuthenticated; else notAuthenticated">
+  <h1>Welcome to the Home Page!</h1>
+  <p>You are logged in and have access to this page.</p>
+</div>
+
+<!-- Template for when the user is not authenticated -->
+<ng-template #notAuthenticated>
+  <p>
+    You are not authenticated. Please <a href="/login">log in</a> to access this
+    page.
+  </p>
+</ng-template>

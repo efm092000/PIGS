@@ -1,0 +1,12 @@
+<nav class="navbar">
+  <span><a href="/home">Home</a></span>
+
+  <!-- Only show these links if the user is not authenticated -->
+  <span *ngIf="!isAuthenticated"><a href="/login">Login</a></span>
+  <span *ngIf="!isAuthenticated"><a href="/register">Register</a></span>
+
+  <!-- Only show the logout button if the user is authenticated -->
+  <span *ngIf="isAuthenticated"
+    ><button (click)="logout()">Logout</button></span
+  >
+</nav>
