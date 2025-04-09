@@ -5,20 +5,30 @@
   padding: 0;
   font-size: 13px;
   font-family: "Poppins", sans-serif;
+  box-sizing: border-box;
 }
 
 /* General styles */
 body {
   background-color: #2c2c2c;
   font-family: 'Poppins', sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+  overflow: hidden; /* Evita el scroll innecesario */
 }
 
 /* Fondo del contenedor principal */
 .container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   height: 100%;
   width: 100%;
-  background-color: #2c2c2c; /* Color sólido en lugar de imagen */
-  position: absolute;
+  background-color: #2c2c2c;
+  position: relative;
 }
 
 /* Caja del formulario */
@@ -38,11 +48,13 @@ body {
   display: flex;
   justify-content: space-between;
   margin-bottom: 20px;
-  width: 240px;
+  width: 100%; /* Asegura que ocupe todo el ancho del contenedor */
+  max-width: 240px; /* Tamaño máximo */
   margin: 30px auto;
   position: relative;
   box-shadow: 0 0 20px 9px #e0e0e0;
   border-radius: 30px;
+  background: #B4C6CC;
 }
 
 .toggle-btn {
@@ -51,7 +63,7 @@ body {
   background: transparent;
   border: none;
   font-size: 16px;
-  color: black; /* Cambiar el color del texto a negro */
+  color: #333; /* Cambiado a un color más oscuro */
 }
 
 .toggle-btn:hover {
@@ -62,63 +74,105 @@ body {
   top: 0;
   left: 0;
   position: absolute;
-  width: 120px; /* Mitad del ancho del button-box */
+  width: 50%; /* Ajustado para que ocupe la mitad del contenedor */
   height: 100%;
-  background: linear-gradient(to right, rgb(206, 233, 246), rgba(255, 255, 255, 0.7));
+  background: #B4C6CC;
   border-radius: 30px;
   transition: 0.4s;
+  z-index: -1; /* Envía el fondo detrás de los botones */
 }
 
 /* Grupo de entradas */
 .input-group {
-  top: 180px;
-  position: absolute;
-  width: 280px;
-  transition: 0.4s;
+  width: 100%;
+  margin-top: 20px;
 }
 
 .input-field {
   width: 100%;
   padding: 10px 0;
-  margin: 5px 0;
-  border-left: 0;
-  border-top: 0;
-  border-right: 0;
+  margin: 10px 0;
+  border: none;
   border-bottom: 2px solid rgb(123, 139, 162);
   outline: none;
   background: transparent;
+  font-size: 14px;
+  color: #333;
 }
 
-/* Botón de envío */
+.input-field::placeholder {
+  color: #aaa;
+}
+
 .submit-btn {
   width: 85%;
   padding: 10px 50px;
   cursor: pointer;
   display: block;
-  margin-top: 25px;
-  background: linear-gradient(to right, rgb(206, 233, 246), rgba(255, 255, 255, 0.7));
+  margin: 25px auto; /* Centrado horizontal */
+  background: #B4C6CC;
   border: 0px;
   outline: none;
   border-radius: 30px;
+  font-size: 16px;
+  text-align: center; /* Asegura que el texto esté centrado */
 }
 
-span {
-  color: #bdbdbd;
-  font-size: 15px;
-  bottom: 64px;
-  position: absolute;
+.submit-btn:hover {
+  background: linear-gradient(to right, rgb(176, 216, 230), rgba(255, 255, 255, 0.9));
 }
 
-/* Posiciones de los formularios */
-#login {
-  left: 50px;
+/* Mensaje de error */
+.error {
+  color: red;
+  font-size: 14px;
+  margin-top: 10px;
+  text-align: center;
 }
 
-#register {
-  left: 450px;
+/* Media Queries para diseño responsive */
+@media (max-width: 768px) {
+  .form-box {
+    width: 95%; /* Más ancho en pantallas pequeñas */
+    padding: 15px;
+  }
+
+  .button-box {
+    max-width: 200px; /* Botones más pequeños */
+  }
+
+  .toggle-btn {
+    font-size: 14px; /* Texto más pequeño */
+  }
+
+  .input-field {
+    font-size: 12px; /* Campos más pequeños */
+  }
+
+  .submit-btn {
+    font-size: 14px; /* Botón más pequeño */
+  }
 }
 
-/* Aviso oculto */
-aviso {
-  display: none;
+@media (max-width: 480px) {
+  .form-box {
+    width: 100%; /* Ocupa todo el ancho */
+    padding: 10px;
+  }
+
+  .button-box {
+    max-width: 180px; /* Botones más pequeños */
+  }
+
+  .toggle-btn {
+    font-size: 12px; /* Texto más pequeño */
+  }
+
+  .input-field {
+    font-size: 12px; /* Campos más pequeños */
+  }
+
+  .submit-btn {
+    font-size: 12px; /* Botón más pequeño */
+  }
 }

@@ -5,6 +5,7 @@
   padding: 0;
   font-size: 13px;
   font-family: "Poppins", sans-serif;
+  box-sizing: border-box;
 }
 
 /* General styles */
@@ -16,6 +17,7 @@ body {
   align-items: center;
   height: 100vh;
   margin: 0;
+  overflow: hidden; /* Evita el scroll innecesario */
 }
 
 /* Fondo del contenedor principal */
@@ -26,13 +28,14 @@ body {
   height: 100%;
   width: 100%;
   background-color: #2c2c2c;
-  position: absolute;
+  position: relative;
 }
 
 /* Caja del formulario */
 .form-box {
   width: 370px;
-  height: 520px;
+  height: 480px;
+  margin: 6% auto;
   background: white;
   padding: 20px;
   border-radius: 20px;
@@ -45,11 +48,13 @@ body {
   display: flex;
   justify-content: space-between;
   margin-bottom: 20px;
-  width: 240px;
+  width: 100%; /* Asegura que ocupe todo el ancho del contenedor */
+  max-width: 240px; /* Tamaño máximo */
   margin: 30px auto;
   position: relative;
   box-shadow: 0 0 20px 9px #e0e0e0;
   border-radius: 30px;
+  background: #B4C6CC;
 }
 
 .toggle-btn {
@@ -69,9 +74,9 @@ body {
   top: 0;
   left: 0;
   position: absolute;
-  width: 120px;
+  width: 50%; /* Ajustado para que ocupe la mitad del contenedor */
   height: 100%;
-  background: linear-gradient(to right, rgb(206, 233, 246), rgba(255, 255, 255, 0.7));
+  background: #B4C6CC;
   border-radius: 30px;
   transition: 0.4s;
 }
@@ -100,15 +105,17 @@ body {
 
 /* Botón de envío */
 .submit-btn {
-  width: 100%;
-  padding: 10px;
-  margin-top: 20px;
-  background: linear-gradient(to right, rgb(206, 233, 246), rgba(255, 255, 255, 0.7));
-  border: none;
+  width: 85%;
+  padding: 10px 50px;
+  cursor: pointer;
+  display: block;
+  margin: 25px auto; /* Centrado horizontal */
+  background: #B4C6CC;
+  border: 0px;
+  outline: none;
   border-radius: 30px;
   font-size: 16px;
-  color: black;
-  cursor: pointer;
+  text-align: center; /* Asegura que el texto esté centrado */
 }
 
 .submit-btn:hover {
