@@ -1,5 +1,6 @@
 import { inject, Injectable } from '@angular/core';
-import { Firestore, collection, addDoc, collectionData, doc, deleteDoc } from '@angular/fire/firestore';
+//import { Firestore, collection, addDoc, collectionData, doc, deleteDoc } from '@angular/fire/firestore';
+import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { Observable } from 'rxjs';
 import { Vessel } from '../interfaces/vessel';
 
@@ -8,21 +9,22 @@ import { Vessel } from '../interfaces/vessel';
 })
 export class FirestoreApiService {
 
-  constructor(private firestore: Firestore) { }
-
-  addVessel(vessel: Vessel) {
-    const vesselRef = collection(this.firestore, 'vessels');
-    return addDoc(vesselRef, vessel);
+  constructor(private firestore: AngularFirestore) {
+    firestore = inject(AngularFirestore)
   }
 
-  getVessels(): Observable<Vessel[]> {
-    const vesselRef = collection(this.firestore, 'vessels');
-    return collectionData(vesselRef, { idField: 'IMO' }) as Observable<Vessel[]>;
+
+
+  addVessel<Vessel>(data: Vessel): Promise<any> {
+    return this.firestore.collection<Vessel>('ships').add(data);
   }
 
-  deleteVessel(vessel: Vessel) {
-    const vesselDocRef = doc(this.firestore, `vessels/${vessel.IMO}`);
-    return deleteDoc(vesselDocRef);
+  getVessels<Vessel>(): Observable<Vessel[]> {
+    return this.firestore.collection<Vessel>('ships').valueChanges({ idField: 'IMO' });
+  }
+
+  deleteVessel<Vessel>(IMO: string): Promise<void> {
+    return this.firestore.doc<Vessel>(`ships/${IMO}`).delete();
   }
 
 }
