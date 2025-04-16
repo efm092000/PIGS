@@ -1,4 +1,4 @@
-# See https://docs.github.com/get-started/getting-started-with-git/ignoring-files for more about ignoring files.
+git# See https://docs.github.com/get-started/getting-started-with-git/ignoring-files for more about ignoring files.
 
 # Compiled output
 /dist
@@ -7,9 +7,12 @@
 /bazel-out
 
 # Node
-/node_modules
+catalog-of-ships/node_modules
 npm-debug.log
 yarn-error.log
+
+#ENV keys
+catalog-of-ships/src/environments/*
 
 # IDEs and editors
 .idea/
@@ -19,7 +22,6 @@ yarn-error.log
 *.launch
 .settings/
 *.sublime-workspace
-/src/environments/*
 
 # Visual Studio Code
 .vscode/*
@@ -41,6 +43,7 @@ testem.log
 # System files
 .DS_Store
 Thumbs.db
+node_modules
 
 # Firebase
 .firebase

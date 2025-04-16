@@ -17,6 +17,10 @@ export class LoginComponent {
 
   constructor(private authService: AuthService, private router: Router) {}
 
+  navigateToRegister() {
+    this.router.navigate(['/register']);
+  }
+
   login() {
     if (this.email && this.password) {
       this.authService
