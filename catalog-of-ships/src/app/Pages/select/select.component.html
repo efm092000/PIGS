@@ -1,0 +1,33 @@
+<div class="bg-[#E1E1E1] h-screen flex flex-col items-center justify-center min-h-screen  p-4">
+  <!-- Imagen principal y botón de información -->
+  <div class="flex items-center space-x-20">
+    <!-- Flecha izquierda -->
+    <button (click)="prevShip()" class="text-2xl">&#9664;</button>
+
+    <!-- Imagen principal -->
+    <div class="bg-gray-400 p-2 rounded w-80 h-80 flex justify-center">
+      <img [src]="selectedShip" alt="Barco" class="w-65 h-70 object-contain " />
+    </div>
+    
+    <!-- Flecha derecha -->
+    <button (click)="nextShip()" class="text-2xl">&#9654;</button>
+    <div class="w-24"></div> <!-- Espacio vertical -->
+
+    <!-- Botón de información -->
+    <div class="bg-gray-400 p-6 rounded w-64 text-center">
+      <span class="font-semibold text-black"> {{card1?.nombre}} </span>
+    </div>
+
+  </div>
+
+  <!-- Miniaturas -->
+  <div class="flex space-x-4 mt-6">
+    <div
+      *ngFor="let ship of card1?.imagen; let i = index"
+      (click)="selectShip(i)"
+      class="cursor-pointer hover:scale-105 transition-transform"
+    >
+      <img [src]="ship" alt="Miniatura" class="w-24 h-20 object-contain bg-gray-300 p-1 rounded" />
+    </div>
+  </div>  
+</div>
