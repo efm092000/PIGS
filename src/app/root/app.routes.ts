@@ -10,5 +10,5 @@ export const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
   { path: 'home', component: HomeComponent },
-  { path: 'form', component: ShipFormComponent}
+  { path: 'form', loadComponent: () => import('../components/ship-form/ship-form.component').then(m => m.ShipFormComponent)}
 ];

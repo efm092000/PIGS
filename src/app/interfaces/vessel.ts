@@ -1,5 +1,5 @@
 export interface Vessel {
-    IMO: number,
+    imo: number,
     name: string,
     length: number,
     width: number,
@@ -7,5 +7,5 @@ export interface Vessel {
     grossTonnage: number,
     passengerCap: number,
     year: number,
-    imagePath: string
+    imagePath: string | undefined
 }

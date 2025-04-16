@@ -1,43 +1,41 @@
-<form>
     <label>
         IMO: 
-        <input type="text" [(ngModel)]="vessel.IMO">
+        <input type="number" [(ngModel)]="vessel.imo" placeholder="0">
     </label>
     
     <label>
         Name: 
-        <input type="text" [(ngModel)]="vessel.name">
+        <input type="text" [(ngModel)]="vessel.name" placeholder="ship">
     </label>
     
     <label>
         Length: 
-        <input type="text" [(ngModel)]="vessel.length">
+        <input type="number" [(ngModel)]="vessel.length" placeholder="0">
     </label>
     
     <label>
         Width: 
-        <input type="text" [(ngModel)]="vessel.width">
+        <input type="number" [(ngModel)]="vessel.width" placeholder="0">
     </label>
 
     <label>
         Draft: 
-        <input type="text" [(ngModel)]="vessel.draft">
+        <input type="number" [(ngModel)]="vessel.draft" placeholder="0">
     </label>
     <label>
         Gross Tonnage: 
-        <input type="text" [(ngModel)]="vessel.grossTonnage">
+        <input type="number" [(ngModel)]="vessel.grossTonnage" placeholder="0">
     </label>
     <label>
         Passengers Capacity: 
-        <input type="text" [(ngModel)]="vessel.passengerCap">
+        <input type="number" [(ngModel)]="vessel.passengerCap" placeholder="0">
     </label>
     <label>
         Building year: 
-        <input type="text" [(ngModel)]="vessel.year">
+        <input type="number" [(ngModel)]="vessel.year" placeholder="0">
     </label>
     <label>
         Image Path: 
-        <input type="text" [(ngModel)]="vessel.imagePath">
+        <input type="number" [(ngModel)]="vessel.imagePath" placeholder="https://path">
     </label>
     <button type="submit" (click)="onSubmit()">Add vessel</button>
-</form>
