@@ -3,7 +3,7 @@ import { importProvidersFrom } from '@angular/core';
 import { AppComponent } from './app/root/app/app.component';
 import { environment } from './environments/environment';
 import { provideRouter } from '@angular/router';
-import { routes } from './app/root/app.routes';
+import { routes } from './app/root/app/app.routes';
 
 // Modular Firebase imports
 import { provideFirebaseApp, initializeApp } from '@angular/fire/app';
