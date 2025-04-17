@@ -17,12 +17,12 @@ export class LoginComponent {
 
   constructor(private authService: AuthService, private router: Router) {}
 
-  navigateToLogin() {
-    this.router.navigate(['/login']);
-  }
-
   navigateToRegister() {
     this.router.navigate(['/register']);
+  }
+
+  navigateToHome() {
+    this.router.navigate(['/home']);
   }
 
   login() {

@@ -1,0 +1,49 @@
+<nav class="flex justify-between items-center p-4 bg-primaryBg shadow-lg">
+  <!-- Left section with navigation links -->
+  <div class="flex space-x-8 text-sm">
+    <a
+      href="/home"
+      class="text-white hover:text-primaryBg transition duration-300"
+      >Home</a
+    >
+    <a
+      href="/ships"
+      class="text-white hover:text-primaryBg transition duration-300"
+      >Ships</a
+    >
+    <a
+      href="/about"
+      class="text-white hover:text-primaryBg transition duration-300"
+      >About</a
+    >
+  </div>
+
+  <!-- Right section with buttons -->
+  <div class="flex space-x-4">
+    <!-- Show Profile button if the user is logged in -->
+    <button
+      *ngIf="isAuthenticated"
+      class="border-2 border-secondaryBg py-2 px-8 text-xs rounded-full bg-secondaryBg hover:bg-primaryBg hover:text-white transition duration-300"
+    >
+      Profile
+    </button>
+
+    <!-- Show Logout button if the user is logged in -->
+    <button
+      *ngIf="isAuthenticated"
+      class="border-2 border-secondaryBg py-2 px-8 text-xs rounded-full bg-secondaryBg hover:bg-primaryBg hover:text-white transition duration-300"
+      (click)="logout()"
+    >
+      Logout
+    </button>
+
+    <!-- Show Login button if the user is not logged in -->
+    <button
+      *ngIf="!isAuthenticated"
+      class="border-2 border-secondaryBg py-2 px-8 text-xs rounded-full bg-secondaryBg hover:bg-primaryBg hover:text-white transition duration-300"
+      (click)="navigateToLogin()"
+    >
+      Login
+    </button>
+  </div>
+</nav>

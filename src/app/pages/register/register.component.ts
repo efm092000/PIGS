@@ -22,8 +22,8 @@ export class RegisterComponent {
     this.router.navigate(['/login']);
   }
 
-  navigateToRegister() {
-    this.router.navigate(['/register']);
+  navigateToHome() {
+    this.router.navigate(['/home']);
   }
 
   register() {
