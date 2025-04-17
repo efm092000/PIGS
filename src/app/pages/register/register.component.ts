@@ -8,9 +8,8 @@ import { CommonModule } from '@angular/common';
   imports: [CommonModule, FormsModule],
   selector: 'app-register',
   templateUrl: './register.component.html',
-  styleUrls: ['./register.component.css'],
+  //styleUrls: ['./register.component.css'],
 })
-
 export class RegisterComponent {
   email = '';
   password = '';
@@ -18,6 +17,14 @@ export class RegisterComponent {
   errorMessage = '';
 
   constructor(private authService: AuthService, private router: Router) {}
+
+  navigateToLogin() {
+    this.router.navigate(['/login']);
+  }
+
+  navigateToRegister() {
+    this.router.navigate(['/register']);
+  }
 
   register() {
     if (this.password !== this.confirmPassword) {

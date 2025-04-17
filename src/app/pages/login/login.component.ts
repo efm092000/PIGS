@@ -8,7 +8,7 @@ import { CommonModule } from '@angular/common';
   imports: [CommonModule, FormsModule],
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css'],
+  //styleUrls: ['./login.component.css'],
 })
 export class LoginComponent {
   email = '';
@@ -16,6 +16,10 @@ export class LoginComponent {
   errorMessage = '';
 
   constructor(private authService: AuthService, private router: Router) {}
+
+  navigateToLogin() {
+    this.router.navigate(['/login']);
+  }
 
   navigateToRegister() {
     this.router.navigate(['/register']);

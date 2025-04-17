@@ -12,7 +12,7 @@ npm-debug.log
 yarn-error.log
 
 #ENV keys
-catalog-of-ships/src/environments/*
+/src/environments/*
 
 # IDEs and editors
 .idea/
