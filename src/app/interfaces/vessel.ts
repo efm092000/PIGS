@@ -7,5 +7,5 @@ export interface Vessel {
     grossTonnage: number,
     passengerCap: number,
     year: number,
-    imagePath: string | undefined
+    imagePath?: string[] 
 }

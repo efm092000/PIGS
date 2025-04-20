@@ -1,0 +1,45 @@
+<app-header></app-header>
+<body>
+  <div class="bg-[#E1E1E1] min-h-screen flex flex-col items-center justify-center p-4 space-y-6">
+
+    <!-- Imagen principal + Flechas + Información -->
+    <div class="flex items-center justify-center space-x-8">
+      <!-- Flecha izquierda -->
+      <button (click)="prevShip()" class="text-4xl font-bold text-gray-700 hover:text-black">&#9664;</button>
+
+      <!-- Imagen principal en su caja -->
+      <div class="bg-[#98A4B3] p-4 rounded-xl w-80 h-80 flex justify-center items-center shadow-md">
+        <img [src]="selectedShip" alt="Ship" class="w-64 h-64 object-contain rounded" />
+      </div>
+
+      <!-- Flecha derecha -->
+      <button (click)="nextShip()" class="text-4xl font-bold text-gray-700 hover:text-black">&#9654;</button>
+
+      <!-- Cuadro de información -->
+      <div class="bg-[#98A4B3] p-6 rounded-xl w-80 h-80 text-black shadow-md flex flex-col justify-center space-y-1 text-sm">
+        <h2 class="text-xl font-bold text-center mb-2">{{ card1?.name }}</h2>
+        <p><strong>IMO:</strong> {{ card1?.imo }}</p>
+        <p><strong>Length:</strong> {{ card1?.length }} m</p>
+        <p><strong>Width:</strong> {{ card1?.width }} m</p>
+        <p><strong>Draft:</strong> {{ card1?.draft }} m</p>
+        <p><strong>Gross Tonnage:</strong> {{ card1?.grossTonnage }}</p>
+        <p><strong>Passenger Cap:</strong> {{ card1?.passengerCap }}</p>
+        <p><strong>Year:</strong> {{ card1?.year }}</p>
+      </div>
+    </div>
+
+    <!-- Miniaturas -->
+    <div class="flex space-x-4">
+      @for (item of card1?.imagePath; track $index) {
+        <div
+          (click)="selectShip($index)"
+          class="cursor-pointer hover:scale-105 transition-transform duration-200"
+        >
+          <div class="bg-[#98A4B3] p-1 rounded-lg shadow">
+            <img [src]="item" alt="Thumbnail" class="w-24 h-20 object-contain rounded" />
+          </div>
+        </div>
+      }
+    </div>
+  </div>
+</body>

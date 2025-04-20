@@ -1,0 +1,22 @@
+<app-header></app-header>
+
+<body class="bg-[#E1E1E1] min-h-screen">
+  <div class="p-4">
+    <app-search (searchChanged)="onSearchChanged($event)"></app-search>
+  </div>
+
+  <!-- Responsive grid -->
+  <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 p-4">
+    @for (item of filteredImages; track $index) {
+      <div
+        class="bg-gray-400 p-4 rounded-lg shadow-md transition-transform transform hover:scale-105 hover:shadow-lg">
+        <img [src]="item.imagePath?.[0]" [alt]="item.name"
+          class="w-full h-32 object-cover rounded-lg cursor-pointer" (click)="selectCard(item)" />
+        <span class="text-xl text-black flex justify-center mt-2">{{ item.name }}</span>
+        <div class="flex justify-center mt-2">
+          <app-star [starId]="'star-' + $index"></app-star>
+        </div>
+      </div>
+    }
+  </div>
+</body>

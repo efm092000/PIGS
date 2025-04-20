@@ -20,7 +20,7 @@ export class ShipFormComponent implements OnInit{
     grossTonnage: 0,
     passengerCap: 0,
     year: 0,
-    imagePath: ""};
+    imagePath: []};
 
   constructor (private firestoreService: FirestoreApiService) {}
 
