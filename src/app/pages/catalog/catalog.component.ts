@@ -2,10 +2,10 @@ import { Component } from '@angular/core';
 import { HeaderComponent } from "../../components/header/header.component";
 import { SearchComponent } from "../../components/search/search.component";
 import { Router } from '@angular/router';
-import { SelectService } from '../../services/select.service';
+import { SelectService } from '../../services/select/select.service';
 import { StarComponent } from "../../components/star/star.component";
 import { Vessel } from '../../interfaces/vessel';
-import { FirestoreApiService } from '../../services/firestore-api.service';
+import { FirestoreApiService } from '../../services/firestore-api/firestore-api.service';
 export interface Card {
   id: number;
   nombre: string;

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { SelectService } from '../../services/select.service';
+import { SelectService } from '../../services/select/select.service';
 import { HeaderComponent } from "../../components/header/header.component";
 import { Vessel } from '../../interfaces/vessel';
 export interface Card {

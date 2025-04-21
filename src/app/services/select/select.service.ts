@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject  } from 'rxjs';
-import { Vessel } from '../interfaces/vessel';
+import { Vessel } from '../../interfaces/vessel';
 export interface Card {
   id: number;
   nombre: string;

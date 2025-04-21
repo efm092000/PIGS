@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Vessel } from '../../interfaces/vessel';
-import { FirestoreApiService } from '../../services/firestore-api.service';
+import { FirestoreApiService } from '../../services/firestore-api/firestore-api.service';
 import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
 
 @Component({

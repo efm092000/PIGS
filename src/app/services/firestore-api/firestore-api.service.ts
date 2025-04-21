@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { inject } from '@angular/core';
 import { Firestore, collection, addDoc, collectionData, doc, deleteDoc, CollectionReference } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
-import { Vessel } from '../interfaces/vessel';
+import { Vessel } from '../../interfaces/vessel';
 
 @Injectable({
   providedIn: 'root',
