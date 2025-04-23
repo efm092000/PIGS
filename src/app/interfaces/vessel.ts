@@ -1,4 +1,5 @@
 export interface Vessel {
+  id: number;
   cabins: number;
   crew: number;
   cruiseline: string;

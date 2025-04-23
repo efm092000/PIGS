@@ -13,6 +13,7 @@ import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
 })
 export class ShipFormComponent implements OnInit {
   protected vessel: Vessel = {
+    id: 0,
     imo: 0,
     name: '',
     length: 0,
