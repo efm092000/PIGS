@@ -9,24 +9,30 @@ import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
   imports: [FormsModule, AngularFirestoreModule],
   standalone: true,
   templateUrl: './ship-form.component.html',
-  styleUrls: ['./ship-form.component.css']
+  styleUrls: ['./ship-form.component.css'],
 })
-export class ShipFormComponent implements OnInit{
-  protected vessel: Vessel = {imo: 0,
-    name: "",
+export class ShipFormComponent implements OnInit {
+  protected vessel: Vessel = {
+    imo: 0,
+    name: '',
     length: 0,
     width: 0,
     draft: 0,
     grossTonnage: 0,
     passengerCap: 0,
     year: 0,
-    imagePath: []};
+    imagePath: [],
+    cruiseline: '',
+    description: '',
+    references: [],
+    crew: 0,
+    cabins: 0,
+    speed: 0,
+  };
 
-  constructor (private firestoreService: FirestoreApiService) {}
+  constructor(private firestoreService: FirestoreApiService) {}
 
-  ngOnInit(): void {
-    
-  }
+  ngOnInit(): void {}
 
   async onSubmit() {
     console.log('Firestore Service: ', this.firestoreService);

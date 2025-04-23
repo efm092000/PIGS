@@ -1,11 +1,17 @@
 export interface Vessel {
-    imo: number,
-    name: string,
-    length: number,
-    width: number,
-    draft: number,
-    grossTonnage: number,
-    passengerCap: number,
-    year: number,
-    imagePath?: string[] 
+  cabins: number;
+  crew: number;
+  cruiseline: string;
+  description: string;
+  draft: number;
+  grossTonnage: number;
+  imagePath: string[];
+  imo: number;
+  length: number;
+  name: string;
+  passengerCap: number;
+  references: string[];
+  speed: number;
+  width: number;
+  year: number;
 }
