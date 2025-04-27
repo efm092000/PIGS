@@ -49,6 +49,20 @@ export class CatalogComponent {
     this.cardService.selectCard(card);
     this.router.navigate(['/select']);
   }
+  showDropdown = false;
+  currentSort = 'passengers';
+  sortOptions = ['passengers', 'crew', 'year', 'speed'];
+
+  toggleDropdown() {
+    this.showDropdown = !this.showDropdown;
+  }
+  setSort(option: string) {
+    this.currentSort = option;
+    this.showDropdown = false;
+
+    // Aquí podrías ordenar tu lista:
+    //this.images= this.images.slice().sort((a, b) => b[this.currentSort] - a[this.currentSort]);
+  }
  
 
 

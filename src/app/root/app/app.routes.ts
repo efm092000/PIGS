@@ -6,6 +6,7 @@ import { RegisterComponent } from '../../pages/register/register.component';
 import { ShipFormComponent } from '../../components/ship-form/ship-form.component';
 import { CatalogComponent } from '../../pages/catalog/catalog.component';
 import { SelectComponent } from '../../pages/select/select.component';
+import { FaqComponent } from '../../pages/faq/faq.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: '/catalog', pathMatch: 'full' },
@@ -14,5 +15,6 @@ export const routes: Routes = [
   { path: 'home', component: HomeComponent },
   { path: 'form', component: ShipFormComponent},
   {path: 'catalog', component:CatalogComponent},
-  {path: 'select', component:SelectComponent}
+  {path: 'select', component:SelectComponent},
+  {path:'faq', component:FaqComponent}
 ];

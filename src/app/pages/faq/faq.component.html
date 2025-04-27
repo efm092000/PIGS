@@ -1,0 +1,87 @@
+<head>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"
+    />
+  </head>
+  
+  <app-header></app-header>
+  
+  <body class="m-0 p-0 box-border font-['Roboto'] bg-[#E1E1E1] h-screen">
+    <h1 class="text-center text-[2.2em] tracking-[3px] pb-5 pt-5">
+      Frequently Asked Questions
+    </h1>
+  
+    <!-- FAQ 1 -->
+    <div class="faq border border-black/20 my-2">
+      <button
+        class="w-full flex justify-between items-center font-bold text-lg p-8 bg-neutral-300 hover:bg-neutral-200 transition-colors duration-300"
+        (click)="togglePanel(0)"
+      >
+        How can I register my ship on the website?
+        <i
+          class="fa-solid fa-chevron-down transition-transform duration-300"
+          [ngClass]="openStates[0] ? 'rotate-180' : ''"
+        ></i>
+      </button>
+      <div
+        class="bg-neutral-300 px-8 overflow-hidden transition-all duration-500 ease-in-out"
+        [ngClass]="openStates[0] ? 'max-h-96 opacity-100 py-10' : 'max-h-0 opacity-0 py-0'"
+      >
+        <p class="text-base leading-relaxed transition-opacity duration-500">
+          To register your ship on our platform, please contact us directly through our contact form or by sending an email to mail. We’ll need some details about your ship, such as its name, type, capacity, year of manufacture, and other technical data. Our team will guide you through the registration process.
+        </p>
+      </div>
+    </div>
+  
+    <!-- FAQ 2 -->
+    <div class="faq border border-black/20 my-2">
+      <button
+        class="w-full flex justify-between items-center font-bold text-lg p-8 bg-neutral-300 hover:bg-neutral-200 transition-colors duration-300"
+        (click)="togglePanel(1)"
+      >
+        What is the cost to register my ship?
+        <i
+          class="fa-solid fa-chevron-down transition-transform duration-300"
+          [ngClass]="openStates[1] ? 'rotate-180' : ''"
+        ></i>
+      </button>
+      <div
+        class="bg-neutral-300 px-8 overflow-hidden transition-all duration-500 ease-in-out"
+        [ngClass]="openStates[1] ? 'max-h-96 opacity-100 py-10' : 'max-h-0 opacity-0 py-0'"
+      >
+        <p class="text-base leading-relaxed transition-opacity duration-500">
+          Registering your ship on our platform is completely free. All we ask is that you provide all the required information and follow the instructions to keep your ship updated in our database.
+        </p>
+      </div>
+    </div>
+  
+    <!-- FAQ 3 -->
+    <div class="faq border border-black/20 my-2">
+      <button
+        class="w-full flex justify-between items-center font-bold text-lg p-8 bg-neutral-300 hover:bg-neutral-200 transition-colors duration-300"
+        (click)="togglePanel(2)"
+      >
+        What are the benefits of registering my ship on this wiki?
+        <i
+          class="fa-solid fa-chevron-down transition-transform duration-300"
+          [ngClass]="openStates[2] ? 'rotate-180' : ''"
+        ></i>
+      </button>
+      <div
+        class="bg-neutral-300 px-8 overflow-hidden transition-all duration-500 ease-in-out"
+        [ngClass]="openStates[2] ? 'max-h-96 opacity-100 py-10' : 'max-h-0 opacity-0 py-0'"
+      >
+        <p class="text-base leading-relaxed transition-opacity duration-500">
+          Registering your ship on our cruise wiki offers several benefits:
+        </p>
+        <ul class="list-disc pl-6 mt-2">
+          <li><strong>Visibility:</strong> Your ship will appear in our database and be accessible to thousands of cruise enthusiasts.</li>
+          <li><strong>Constant updates:</strong> You will have access to updates on new regulations or technologies in the cruise industry.</li>
+          <li><strong>Exclusive resources:</strong> As part of our community, you'll have access to exclusive guides and resources to improve the operation of your ship.</li>
+        </ul>
+      </div>
+    </div>
+  
+  </body>
+  

@@ -1,20 +1,49 @@
 <app-header></app-header>
 
 <body class="bg-[#E1E1E1] min-h-screen">
-  <div class="p-4">
-    <app-search (searchChanged)="onSearchChanged($event)"></app-search>
+  <!-- Barra superior -->
+  <div class="flex justify-between items-center p-4">
+    <div class="w-1/2">
+      <app-search (searchChanged)="onSearchChanged($event)"></app-search>
+    </div>
+    <div>
+      <button (click)="toggleDropdown()" class="flex items-center gap-2 bg-white px-4 py-2 rounded-lg shadow text-gray-700">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24"
+          stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+            d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2a1 1 0 01-1 1h-4l-2 3v3l2 3h4a1 1 0 011 1v2a1 1 0 01-1 1H4a1 1 0 01-1-1v-2a1 1 0 011-1h4l2-3v-3L8 7H4a1 1 0 01-1-1V4z" />
+        </svg>
+        Sort by: <span class="font-semibold">{{currentSort}}</span>
+      </button>
+      @if (showDropdown) {
+        <div class="absolute z-10 mt-2 w-40 bg-white border border-gray-200 rounded-lg shadow-lg">
+          <ul class="py-1 text-sm text-gray-700">
+            @for (option of sortOptions; track $index) {
+              <li (click)="setSort(option)" class="px-4 py-2 hover:bg-gray-100 cursor-pointer">
+              {{ option }}
+            </li>
+            }
+            
+          </ul>
+        </div>
+      }
+    </div>
   </div>
 
-  <!-- Responsive grid -->
-  <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 p-4">
+  <!-- Grid de tarjetas -->
+  <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 px-6">
     @for (item of filteredImages; track $index) {
-      <div
-        class="bg-gray-400 p-4 rounded-lg shadow-md transition-transform transform hover:scale-105 hover:shadow-lg">
-        <img [src]="item.imagePath?.[0]" [alt]="item.name"
-          class="w-full h-32 object-cover rounded-lg cursor-pointer" (click)="selectCard(item)" />
-        <span class="text-xl text-black flex justify-center mt-2">{{ item.name }}</span>
-        <div class="flex justify-center mt-2">
-          <app-star [starId]="'star-' + $index"></app-star>
+      <div class="bg-white rounded-xl shadow-md hover:shadow-lg transition transform hover:scale-105 overflow-hidden">
+        <img [src]="item.imagePath?.[0]" [alt]="item.name" class="w-full h-40 object-cover" (click)="selectCard(item)" />
+        <div class="p-4 relative">
+          <h3 class="text-lg font-bold text-gray-800">{{ item.name }}</h3>
+          <p class="text-sm text-gray-600">The World Residences at Sea</p>
+          <div class="mt-2 text-xs text-gray-500 flex flex-wrap gap-x-2 gap-y-1">
+            <span>Year: {{ item.year }}</span>
+          </div>
+          <div class="absolute bottom-4 right-4">
+            <app-star [starId]="'star-' + $index"></app-star>
+          </div>
         </div>
       </div>
     }
