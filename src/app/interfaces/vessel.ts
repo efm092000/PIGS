@@ -7,5 +7,11 @@ export interface Vessel {
     grossTonnage: number,
     passengerCap: number,
     year: number,
-    imagePath?: string[] 
+    imagePath?: string[],
+    crew?: number,
+    cabins?: number,
+    cruiseline?: string,
+    description?: string,
+    speed?: number,
+    references?: string[]  
 }

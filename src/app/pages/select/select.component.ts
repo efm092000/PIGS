@@ -2,6 +2,9 @@ import { Component } from '@angular/core';
 import { SelectService } from '../../services/select/select.service';
 import { HeaderComponent } from "../../components/header/header.component";
 import { Vessel } from '../../interfaces/vessel';
+import { Router } from '@angular/router';
+import { CatalogComponent } from '../catalog/catalog.component';
+import { StarComponent } from "../../components/star/star.component";
 export interface Card {
   id: number;
   nombre: string;
@@ -10,14 +13,13 @@ export interface Card {
 
 @Component({
   selector: 'app-select',
-  imports: [HeaderComponent],
+  imports: [HeaderComponent, StarComponent],
   templateUrl: './select.component.html',
   styleUrl: './select.component.css'
 })
 export class SelectComponent {
-  constructor(private cardService: SelectService) { }
+  constructor(private cardService: SelectService,private router: Router) { }
   card1?: Vessel;
-
 
   ngOnInit() {
     const storedCard = this.cardService.getCardFromStorage();
@@ -43,6 +45,10 @@ export class SelectComponent {
 
   nextShip() {
     if (this.selectedIndex < (this.card1?.imagePath?.length ?? 0) - 1) this.selectedIndex++;
+  }
+  cargarPagina() {
+    this.router.navigate(['catalog']);
+    localStorage.setItem('returnUrl', this.router.url);
   }
 
 }

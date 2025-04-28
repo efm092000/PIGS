@@ -1,45 +1,91 @@
 <app-header></app-header>
+
 <body>
-  <div class="bg-[#E1E1E1] min-h-screen flex flex-col items-center justify-center p-4 space-y-6">
+  <div class="bg-[#E1E1E1] min-h-screen flex flex-col items-center justify-start p-6 space-y-8">
 
-    <!-- Imagen principal + Flechas + Información -->
-    <div class="flex items-center justify-center space-x-8">
-      <!-- Flecha izquierda -->
-      <button (click)="prevShip()" class="text-4xl font-bold text-gray-700 hover:text-black">&#9664;</button>
-
-      <!-- Imagen principal en su caja -->
-      <div class="bg-[#98A4B3] p-4 rounded-xl w-80 h-80 flex justify-center items-center shadow-md">
-        <img [src]="selectedShip" alt="Ship" class="w-64 h-64 object-contain rounded" />
-      </div>
-
-      <!-- Flecha derecha -->
-      <button (click)="nextShip()" class="text-4xl font-bold text-gray-700 hover:text-black">&#9654;</button>
-
-      <!-- Cuadro de información -->
-      <div class="bg-[#98A4B3] p-6 rounded-xl w-80 h-80 text-black shadow-md flex flex-col justify-center space-y-1 text-sm">
-        <h2 class="text-xl font-bold text-center mb-2">{{ card1?.name }}</h2>
-        <p><strong>IMO:</strong> {{ card1?.imo }}</p>
-        <p><strong>Length:</strong> {{ card1?.length }} m</p>
-        <p><strong>Width:</strong> {{ card1?.width }} m</p>
-        <p><strong>Draft:</strong> {{ card1?.draft }} m</p>
-        <p><strong>Gross Tonnage:</strong> {{ card1?.grossTonnage }}</p>
-        <p><strong>Passenger Cap:</strong> {{ card1?.passengerCap }}</p>
-        <p><strong>Year:</strong> {{ card1?.year }}</p>
-      </div>
+    <!-- Botón Back -->
+    <div class="self-start">
+      <button (click)="cargarPagina()"  class="bg-gray-300 text-black font-semibold hover:bg-gray-400 rounded-full px-4 py-2 flex items-center space-x-2">
+        <span class="text-2xl">&lt;</span> <span>back</span>
+      </button>
     </div>
 
-    <!-- Miniaturas -->
-    <div class="flex space-x-4">
-      @for (item of card1?.imagePath; track $index) {
-        <div
-          (click)="selectShip($index)"
-          class="cursor-pointer hover:scale-105 transition-transform duration-200"
-        >
-          <div class="bg-[#98A4B3] p-1 rounded-lg shadow">
-            <img [src]="item" alt="Thumbnail" class="w-24 h-20 object-contain rounded" />
-          </div>
+    <!-- Contenido principal: imagen + información -->
+    <div class="flex flex-wrap justify-center items-start gap-8">
+
+      <!-- Información del barco -->
+      <div class="flex flex-col space-y-4 max-w-md">
+
+        <!-- Nombre y empresa -->
+        <div>
+          <h1 class="text-3xl font-bold">{{ card1?.name }}</h1>
+          <h2 class="text-md text-gray-600">{{ card1?.cruiseline }}</h2>
         </div>
-      }
+
+        <!-- Descripción -->
+        <p class="text-gray-700 text-sm">
+          {{ card1?.description }}
+        </p>
+
+        <!-- Datos técnicos -->
+        <div>
+          <h3 class="font-semibold mb-2">Technical Information:</h3>
+          <ul class="text-sm list-disc list-inside text-gray-700 space-y-1">
+            <li><strong>Length:</strong> {{ card1?.length }} m</li>
+            <li><strong>Width:</strong> {{ card1?.width }} m</li>
+            <li><strong>Draft:</strong> {{ card1?.draft }} m</li>
+            <li><strong>Speed:</strong> {{ card1?.speed }} kn</li>
+            <li><strong>Gross Tonnage:</strong> {{ card1?.grossTonnage }}</li>
+            <li><strong>Year:</strong> {{ card1?.year }}</li>
+          </ul>
+        </div>
+
+        <!-- Datos de pasajeros -->
+        <div>
+          <h3 class="font-semibold mb-2">Passenger Information:</h3>
+          <ul class="text-sm list-disc list-inside text-gray-700 space-y-1">
+            <li><strong>Passenger Cap:</strong> {{ card1?.passengerCap }}</li>
+            <li><strong>Crew:</strong> {{ card1?.crew }}</li>
+            <li><strong>Cabins:</strong> {{ card1?.cabins }}</li>
+          </ul>
+        </div>
+
+        <!-- Referencias -->
+        <div class="bg-gray-800 p-4 rounded-xl text-white text-sm space-y-2">
+          <h3 class="font-semibold">References</h3>
+          <ul class="list-disc list-inside space-y-1">
+            @for (ref of card1?.references; track $index) {
+              <li>
+                <a [href]="ref" target="_blank" class="hover:underline">{{ ref }}</a>
+              </li>
+            }
+          </ul>
+        </div>
+
+      </div>
+      <!-- Imagen principal -->
+      <div class="relative bg-white p-4 rounded-2xl shadow-lg">
+        <div class="absolute top-0 left-[calc(100%+16px)] p-2">
+          <app-star></app-star>
+        </div>
+        <!-- Flecha izquierda -->
+        <button 
+          class="absolute left-2 top-1/2 transform -translate-y-1/2 bg-transparent text-white rounded-full p-2"
+          (click)="prevShip()">
+          <span class="text-2xl">&lt;</span>
+        </button>
+
+        <!-- Imagen -->
+        <img [src]="selectedShip" alt="Ship" class="w-96 h-64 object-cover rounded-xl" />
+
+        <!-- Flecha derecha -->
+        <button 
+          class="absolute right-2 top-1/2 transform -translate-y-1/2 bg-trasnparent text-white rounded-full p-2"
+          (click)="nextShip()">
+          <span class="text-2xl">&gt;</span>
+        </button>
+      </div>
     </div>
+
   </div>
 </body>
