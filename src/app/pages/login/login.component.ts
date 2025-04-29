@@ -1,44 +1,34 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { AuthService } from '../../services/auth/auth.service';
-import { FormsModule } from '@angular/forms';
-import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms'; 
 
 @Component({
-  imports: [CommonModule, FormsModule],
   selector: 'app-login',
+  standalone: true,
+  imports: [FormsModule],
   templateUrl: './login.component.html',
-  //styleUrls: ['./login.component.css'],
+  styleUrls: ['./login.component.css'],
 })
 export class LoginComponent {
-  email = '';
-  password = '';
-  errorMessage = '';
+  email: string = '';
+  password: string = '';
+  errorMessage: string = '';
 
-  constructor(private authService: AuthService, private router: Router) {}
+  constructor(private router: Router) {}
 
-  navigateToLogin() {
-    this.router.navigate(['/login']);
+  login() {
+    // Lógica de inicio de sesión
   }
 
   navigateToRegister() {
     this.router.navigate(['/register']);
   }
 
-  login() {
-    if (this.email && this.password) {
-      this.authService
-        .login(this.email, this.password)
-        .then((userCredential) => {
-          console.log('User logged in:', userCredential);
-          this.router.navigate(['/home']);
-        })
-        .catch((error) => {
-          this.errorMessage = error.message;
-          console.error('Login failed:', error);
-        });
-    } else {
-      this.errorMessage = 'Please enter both email and password';
-    }
+  navigateToLogin() {
+    this.router.navigate(['/login']);
+  }
+
+  goBack() {
+    this.router.navigate(['/']); // Navega a la página de inicio
   }
 }

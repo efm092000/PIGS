@@ -48,8 +48,8 @@ body {
   display: flex;
   justify-content: space-between;
   margin-bottom: 20px;
-  width: 100%; /* Asegura que ocupe todo el ancho del contenedor */
-  max-width: 240px; /* Tamaño máximo */
+  width: 100%;
+  max-width: 240px;
   margin: 30px auto;
   position: relative;
   box-shadow: 0 0 20px 9px #e0e0e0;
@@ -134,49 +134,30 @@ body {
   text-align: center;
 }
 
-/* Media Queries para diseño responsive */
-@media (max-width: 768px) {
-  .form-box {
-    width: 95%; /* Más ancho en pantallas pequeñas */
-    padding: 15px;
-  }
-
-  .button-box {
-    max-width: 200px; /* Botones más pequeños */
-  }
-
-  .toggle-btn {
-    font-size: 14px; /* Texto más pequeño */
-  }
-
-  .input-field {
-    font-size: 12px; /* Campos más pequeños */
-  }
-
-  .submit-btn {
-    font-size: 14px; /* Botón más pequeño */
-  }
+/* Botón Go Back */
+.go-back-btn {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  width: 50px;
+  height: 50px;
+  background-color: #007bff; /* Azul */
+  border: none;
+  border-radius: 50%; /* Botón redondo */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  z-index: 10; /* Asegura que esté por encima del contenido */
 }
 
-@media (max-width: 480px) {
-  .form-box {
-    width: 100%; /* Ocupa todo el ancho */
-    padding: 10px;
-  }
+.go-back-btn:hover {
+  background-color: #0056b3; /* Azul más oscuro al pasar el cursor */
+}
 
-  .button-box {
-    max-width: 180px; /* Botones más pequeños */
-  }
-
-  .toggle-btn {
-    font-size: 12px; /* Texto más pequeño */
-  }
-
-  .input-field {
-    font-size: 12px; /* Campos más pequeños */
-  }
-
-  .submit-btn {
-    font-size: 12px; /* Botón más pequeño */
-  }
+.go-back-btn span {
+  font-size: 20px;
+  color: white;
 }

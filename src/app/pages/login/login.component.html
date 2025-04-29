@@ -1,8 +1,17 @@
 <div
   class="bg-primaryBg min-h-screen flex items-center justify-center overflow-hidden"
 >
+  <!-- Botón Go Back -->
+  <button
+    type="button"
+    class="go-back-btn"
+    (click)="goBack()"
+  >
+    <span class="text-white text-xl">&larr;</span>
+  </button>
+
   <div class="w-full max-w-md p-6">
-    <div class="bg-white rounded-2xl shadow-md w-full h-[480px] p-6">
+    <div class="bg-white rounded-2xl shadow-md w-full p-6">
       <!-- Toggle Button Box -->
       <div class="flex justify-center mb-8">
         <div
