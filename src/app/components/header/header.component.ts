@@ -1,33 +1,29 @@
-import { Component, OnInit } from '@angular/core';
-import { Router} from '@angular/router';
-import { AuthService } from '../../services/auth/auth.service';
+import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-header',
-  imports: [],
   templateUrl: './header.component.html',
-  styleUrl: './header.component.css'
+  styleUrls: ['./header.component.css'],
 })
-export class HeaderComponent implements OnInit{
-  isAuthenticated: Boolean = false;
+export class HeaderComponent {
+  isAuthenticated = false; // Cambia esto según tu lógica de autenticación
 
-  constructor(private authService: AuthService, private router: Router){}
-  
-  ngOnInit(): void {
-    this.authService.getUser().subscribe((user) => {
-      this.isAuthenticated = !!user; // Set to true if the user exists, false otherwise
-    });
+  constructor(private router: Router) {}
+
+  cargarPagina(page: string) {
+    this.router.navigate([`/${page}`]);
   }
 
-  userLogout(){
-    this.authService.logout();
-    this.authService.getUser().subscribe((user) => {
-      this.isAuthenticated = !!user; // Set to true if the user exists, false otherwise
-    });
+  navigateToSettings() {
+    if (this.isAuthenticated) {
+      this.router.navigate(['/settings']);
+    }
   }
 
-  cargarPagina(url: string) {
-    this.router.navigate([url]);
-    localStorage.setItem('returnUrl', this.router.url);
+  userLogout() {
+    // Lógica para cerrar sesión
+    this.isAuthenticated = false;
+    this.router.navigate(['/login']);
   }
 }

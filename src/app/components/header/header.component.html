@@ -1,8 +1,8 @@
-<header class="bg-gray-800  shadow-md">
+<header class="bg-gray-800 shadow-md">
   <div class="container mx-auto flex justify-between items-center py-3 px-6">
     <!-- Logo -->
     <a href="#" class="flex items-center">
-      <img src="./image/logobarcos.png" alt="Logo" class="h-16 w-13 object-cover " />
+      <img src="./image/logobarcos.png" alt="Logo" class="h-16 w-13 object-cover" />
     </a>
 
     <!-- Navegación -->
@@ -27,21 +27,38 @@
     <div class="flex items-center space-x-4">
       <div class="bg-white text-black rounded-full p-1">
         <!-- Ícono de usuario (SVG) -->
-        @if (isAuthenticated) {
-          <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24">
-            <path d="M12 12c2.7 0 5-2.3 5-5s-2.3-5-5-5-5 2.3-5 5 2.3 5 5 5zm0 2c-3.3 0-10 1.7-10 5v3h20v-3c0-3.3-6.7-5-10-5z"/>
-          </svg>
-        } @else {
-          <svg (click)="cargarPagina('login')" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 cursor-pointer" fill="currentColor" viewBox="0 0 24 24">
-            <path d="M12 12c2.7 0 5-2.3 5-5s-2.3-5-5-5-5 2.3-5 5 2.3 5 5 5zm0 2c-3.3 0-10 1.7-10 5v3h20v-3c0-3.3-6.7-5-10-5z"/>
-          </svg>
-        }
-        
+        <svg
+          *ngIf="isAuthenticated"
+          (click)="navigateToSettings()"
+          xmlns="http://www.w3.org/2000/svg"
+          class="h-6 w-6 cursor-pointer"
+          fill="currentColor"
+          viewBox="0 0 24 24"
+        >
+          <path
+            d="M12 12c2.7 0 5-2.3 5-5s-2.3-5-5-5-5 2.3-5 5 2.3 5 5 5zm0 2c-3.3 0-10 1.7-10 5v3h20v-3c0-3.3-6.7-5-10-5z"
+          />
+        </svg>
+        <svg
+          *ngIf="!isAuthenticated"
+          (click)="cargarPagina('login')"
+          xmlns="http://www.w3.org/2000/svg"
+          class="h-6 w-6 cursor-pointer"
+          fill="currentColor"
+          viewBox="0 0 24 24"
+        >
+          <path
+            d="M12 12c2.7 0 5-2.3 5-5s-2.3-5-5-5-5 2.3-5 5 2.3 5 5 5zm0 2c-3.3 0-10 1.7-10 5v3h20v-3c0-3.3-6.7-5-10-5z"
+          />
+        </svg>
       </div>
-      @if (isAuthenticated) {
-        <button (click)="userLogout()" class="bg-white text-black px-4 py-1 rounded-full text-sm hover:bg-gray-200">LOG-OUT</button>
-      }
-      
+      <button
+        *ngIf="isAuthenticated"
+        (click)="userLogout()"
+        class="bg-white text-black px-4 py-1 rounded-full text-sm hover:bg-gray-200"
+      >
+        LOG-OUT
+      </button>
     </div>
   </div>
 </header>
