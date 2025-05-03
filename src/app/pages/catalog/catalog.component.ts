@@ -1,69 +1,108 @@
-import { Component } from '@angular/core';
-import { HeaderComponent } from "../../components/header/header.component";
-import { SearchComponent } from "../../components/search/search.component";
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { SelectService } from '../../services/select/select.service';
-import { StarComponent } from "../../components/star/star.component";
+import {
+  faSortAmountUp,
+  faSortAmountDown,
+} from '@fortawesome/free-solid-svg-icons';
+import { CommonModule } from '@angular/common';
+
 import { Vessel } from '../../interfaces/vessel';
+import { SelectService } from '../../services/select/select.service';
 import { FirestoreApiService } from '../../services/firestore-api/firestore-api.service';
-export interface Card {
-  id: number;
-  nombre: string;
-  imagen: string[];
-}
+
+import { HeaderComponent } from '../../components/header/header.component';
+import { SearchComponent } from '../../components/search/search.component';
+import { FooterComponent } from '../../components/footer/footer.component';
+import { CommonButtonComponent } from '../../components/common-button/common-button.component';
+import { CruiseCardComponent } from '../../components/cruise-card/cruise-card.component';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 @Component({
   selector: 'app-catalog',
-  imports: [HeaderComponent, SearchComponent, StarComponent],
+  standalone: true,
+  imports: [
+    CommonModule,
+    HeaderComponent,
+    SearchComponent,
+    FooterComponent,
+    CommonButtonComponent,
+    CruiseCardComponent,
+    FontAwesomeModule,
+  ],
   templateUrl: './catalog.component.html',
-  styleUrl: './catalog.component.css'
+  styleUrls: ['./catalog.component.css'],
 })
-export class CatalogComponent {
-  searchQuery: string = ''; // Recibe el texto de búsqueda desde el componente hijo
+export class CatalogComponent implements OnInit {
+  searchQuery = '';
+  vessels: Vessel[] = [];
+  sortDirection: 'asc' | 'desc' = 'desc';
+  currentSort = 'passengers';
+  showDropdown = false;
 
-  images: Vessel[]= [];
+  sortOptions = ['passengers', 'crew', 'year', 'speed'];
+  sortKeyMap: Record<string, keyof Vessel> = {
+    passengers: 'passengerCap',
+    crew: 'crew',
+    year: 'year',
+    speed: 'speed',
+  };
 
-  
-  constructor(private router: Router, 
-    private cardService: SelectService,
-  private firestore:FirestoreApiService) { }
+  faSortAmountUp = faSortAmountUp;
+  faSortAmountDown = faSortAmountDown;
 
-  
+  constructor(
+    private router: Router,
+    private selectService: SelectService,
+    private firestore: FirestoreApiService
+  ) {}
+
   ngOnInit(): void {
-    this.firestore.getVessels().subscribe(data => {
-      this.images = data;
+    this.firestore.getVessels().subscribe((data) => {
+      this.vessels = data;
     });
   }
 
-  get filteredImages() {
-    return this.images.filter(img =>
-      img.name?.toLowerCase().includes(this.searchQuery.toLowerCase())
+  get filteredVessels(): Vessel[] {
+    const key = this.sortKeyMap[this.currentSort];
+    const query = this.searchQuery.toLowerCase();
+
+    const filtered = this.vessels.filter((vessel) =>
+      vessel.name?.toLowerCase().includes(query)
     );
+
+    return filtered.sort((a, b) => {
+      const aVal = a[key];
+      const bVal = b[key];
+      if (aVal === undefined || bVal === undefined) return 0;
+
+      const result =
+        typeof aVal === 'number' && typeof bVal === 'number'
+          ? aVal - bVal
+          : String(aVal).localeCompare(String(bVal));
+
+      return this.sortDirection === 'asc' ? result : -result;
+    });
   }
 
-  onSearchChanged(query: string) {
+  updateSearch(query: string): void {
     this.searchQuery = query;
   }
 
-  selectCard(card: Vessel) {
-    this.cardService.selectCard(card);
+  selectVessel(vessel: Vessel): void {
+    this.selectService.selectCard(vessel);
     this.router.navigate(['/select']);
   }
-  showDropdown = false;
-  currentSort = 'passengers';
-  sortOptions = ['passengers', 'crew', 'year', 'speed'];
 
-  toggleDropdown() {
+  toggleDropdown(): void {
     this.showDropdown = !this.showDropdown;
   }
-  setSort(option: string) {
+
+  toggleSortDirection(): void {
+    this.sortDirection = this.sortDirection === 'asc' ? 'desc' : 'asc';
+  }
+
+  changeSort(option: string): void {
     this.currentSort = option;
     this.showDropdown = false;
-
-    // Aquí podrías ordenar tu lista:
-    //this.images= this.images.slice().sort((a, b) => b[this.currentSort] - a[this.currentSort]);
   }
- 
-
-
 }

@@ -1,43 +1,42 @@
 /* Oculta los checkboxes */
 input[type="checkbox"] {
-    display: none;
+  display: none;
+}
+
+/* Ajusta el tamaño y el estilo de las estrellas */
+label svg {
+  width: 30px;
+  height: 30px;
+  fill: none;
+  stroke: #000;
+  stroke-width: 2px;
+  cursor: pointer;
+  transition: fill 0.3s, transform 0.2s;
+}
+
+/* Cuando el checkbox está marcado, la estrella se llena de color */
+input[type="checkbox"]:checked + label svg {
+  fill: #ffc107;
+  stroke: #ffc107;
+  animation: pop_42 0.3s ease-out;
+}
+
+/* Animación de "pop" */
+@keyframes pop_42 {
+  0% {
+    transform: scale(1);
   }
-  
-  /* Ajusta el tamaño y el estilo de las estrellas */
-  label svg {
-    width: 30px;
-    height: 30px;
-    fill: none;
-    stroke: #000;
-    stroke-width: 2px;
-    cursor: pointer;
-    transition: fill 0.3s, transform 0.2s;
+  50% {
+    transform: scale(1.3);
   }
-  
-  /* Cuando el checkbox está marcado, la estrella se llena de color */
-  input[type="checkbox"]:checked + label svg {
-    fill: #FFC107;
-    stroke: #FFC107;
-    animation: pop_42 0.3s ease-out;
+  100% {
+    transform: scale(1);
   }
-  
-  /* Animación de "pop" */
-  @keyframes pop_42 {
-    0% {
-      transform: scale(1);
-    }
-    50% {
-      transform: scale(1.3);
-    }
-    100% {
-      transform: scale(1);
-    }
-  }
-  
-  /* Espaciado entre estrellas si están en una fila */
-  .star-container {
-    display: flex;
-    gap: 5px; /* Espacio entre estrellas */
-    justify-content: center;
-  }
-  
+}
+
+/* Espaciado entre estrellas si están en una fila */
+.star-container {
+  display: flex;
+  gap: 5px; /* Espacio entre estrellas */
+  justify-content: center;
+}

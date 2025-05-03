@@ -1,0 +1,25 @@
+<div
+  class="bg-white rounded-md shadow-md hover:shadow-lg transition transform hover:scale-105 overflow-hidden cursor-pointer"
+  (click)="onClick()"
+>
+  <img
+    [src]="vessel.imagePath?.[0]"
+    [alt]="vessel.name"
+    class="w-full h-40 object-cover"
+  />
+  <div class="p-4 relative">
+    <h3 class="text-lg font-bold text-gray-800">{{ vessel.name }}</h3>
+    <p class="text-sm text-gray-600">The World Residences at Sea</p>
+    <div class="mt-2 text-xs text-gray-500 flex flex-wrap gap-x-2 gap-y-1">
+      <span class="text-nowrap"
+        >Crew {{ vessel.crew }} · Passengers {{ vessel.passengerCap }} · Speed
+        {{ vessel.speed }} knots · Year {{ vessel.year }}</span
+      >
+    </div>
+
+    <!-- Stop click propagation here -->
+    <div class="absolute bottom-4 right-4" (click)="$event.stopPropagation()">
+      <app-star [starId]="'star-' + vessel.imo"></app-star>
+    </div>
+  </div>
+</div>
