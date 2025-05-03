@@ -2,7 +2,7 @@
   class="bg-primary shadow-md sticky top-0 z-50 flex flex-row flex-nowrap items-center justify-between px-9 py-3 shadow-lg"
 >
   <!-- Navigation -->
-  <nav class="flex flex-row flex-nowrap items-center gap-9">
+  <nav class="flex flex-row flex-nowrap items-center gap-6">
     <!-- Logo -->
     <a (click)="navigateTo('home')" class="flex items-center">
       <img
@@ -11,7 +11,6 @@
         class="h-16 w-13 object-cover"
       />
     </a>
-
     <!-- Navigation Links -->
     <a
       (click)="navigateTo('home')"
@@ -30,7 +29,7 @@
         'text-white hover:text-secondary': currentRoute !== 'catalog'
       }"
       class="cursor-pointer"
-      >Ship</a
+      >Catalogue</a
     >
 
     <a
@@ -42,20 +41,11 @@
       class="cursor-pointer"
       >FAQ</a
     >
-
-    <a
-      (click)="navigateTo('route')"
-      [ngClass]="{
-        'underline text-secondary': currentRoute === 'route',
-        'text-white hover:text-secondary': currentRoute !== 'route'
-      }"
-      class="cursor-pointer"
-      >Route</a
-    >
   </nav>
 
   <!-- User/Login Section -->
-  <div class="flex items-center space-x-4">
+  <div class="flex flex-row flex-nowrap items-center gap-4">
+    <!-- Check if user is authenticated -->
     @if (isAuthenticated) {
     <common-button [icon]="faUser" (action)="(null)"></common-button>
     } @else {
@@ -69,6 +59,12 @@
       [text]="'log-out'"
       [icon]="faSignOut"
       (action)="userLogout()"
+      class="md:flex gap-2 md:block hidden"
+    ></common-button>
+    <common-button
+      [icon]="faSignOut"
+      (action)="userLogout()"
+      class="md:hidden"
     ></common-button>
     }
   </div>
