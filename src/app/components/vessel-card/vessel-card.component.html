@@ -1,5 +1,5 @@
 <div
-  class="bg-white rounded-md shadow-md hover:shadow-lg transition transform hover:scale-105 overflow-hidden cursor-pointer"
+  class="bg-white rounded-md shadow-md hover:shadow-lg transition transform hover:scale-105 overflow-hidden cursor-pointer min-w-max relative"
   (click)="onClick()"
 >
   <img
@@ -11,14 +11,12 @@
     <h3 class="text-lg font-bold text-gray-800">{{ vessel.name }}</h3>
     <p class="text-sm text-gray-600">The World Residences at Sea</p>
     <div class="mt-2 text-xs text-gray-500 flex flex-wrap gap-x-2 gap-y-1">
-      <span class="text-nowrap"
-        >Crew {{ vessel.crew }} · Passengers {{ vessel.passengerCap }} · Speed
-        {{ vessel.speed }} knots · Year {{ vessel.year }}</span
-      >
+      <span class="text-nowrap">
+        Crew {{ vessel.crew }} · Passengers {{ vessel.passengerCap }} · Speed
+        {{ vessel.speed }} knots · Year {{ vessel.year }}
+      </span>
     </div>
-
-    <!-- Stop click propagation here -->
-    <div class="absolute bottom-4 right-4" (click)="$event.stopPropagation()">
+    <div class="absolute top-4 right-4" (click)="$event.stopPropagation()">
       <app-star [starId]="'star-' + vessel.imo"></app-star>
     </div>
   </div>

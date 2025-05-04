@@ -13,8 +13,7 @@ import { FirestoreApiService } from '../../services/firestore-api/firestore-api.
 import { HeaderComponent } from '../../components/header/header.component';
 import { SearchComponent } from '../../components/search/search.component';
 import { FooterComponent } from '../../components/footer/footer.component';
-import { CommonButtonComponent } from '../../components/common-button/common-button.component';
-import { CruiseCardComponent } from '../../components/cruise-card/cruise-card.component';
+import { VesselCardComponent } from '../../components/vessel-card/vessel-card.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 @Component({
@@ -25,8 +24,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
     HeaderComponent,
     SearchComponent,
     FooterComponent,
-    CommonButtonComponent,
-    CruiseCardComponent,
+    VesselCardComponent,
     FontAwesomeModule,
   ],
   templateUrl: './catalog.component.html',

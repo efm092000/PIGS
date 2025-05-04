@@ -1,17 +1,17 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { CruiseCardComponent } from './cruise-card.component';
+import { VesselInfoComponent } from './vessel-info.component';
 
-describe('CruiseTagComponent', () => {
-  let component: CruiseCardComponent;
-  let fixture: ComponentFixture<CruiseCardComponent>;
+describe('SelectComponent', () => {
+  let component: VesselInfoComponent;
+  let fixture: ComponentFixture<VesselInfoComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [CruiseCardComponent],
+      imports: [VesselInfoComponent],
     }).compileComponents();
 
-    fixture = TestBed.createComponent(CruiseCardComponent);
+    fixture = TestBed.createComponent(VesselInfoComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

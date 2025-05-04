@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject  } from 'rxjs';
+import { BehaviorSubject } from 'rxjs';
 import { Vessel } from '../../interfaces/vessel';
 export interface Card {
   id: number;
@@ -7,10 +7,9 @@ export interface Card {
   imagen: string[];
 }
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class SelectService {
-
   private cardSelectedSource = new BehaviorSubject<Vessel | null>(null);
   cardSelected$ = this.cardSelectedSource.asObservable();
 
@@ -18,7 +17,8 @@ export class SelectService {
     this.cardSelectedSource.next(card);
     localStorage.setItem('selectedCard', JSON.stringify(card)); // Guardar en localStorage
   }
-  public getCardFromStorage():Vessel | undefined {
+  public getCardFromStorage(): Vessel | undefined {
     const saved = localStorage.getItem('selectedCard');
     return saved ? JSON.parse(saved) : undefined;
-  }}
+  }
+}

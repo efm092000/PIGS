@@ -1,14 +1,14 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { Vessel } from '../../interfaces/vessel';
-import { StarComponent } from '../../components/star/star.component';
+import { StarComponent } from '../star/star.component';
 
 @Component({
-  selector: 'cruise-card-component',
+  selector: 'vessel-card-component',
   imports: [StarComponent],
-  templateUrl: './cruise-card.component.html',
-  styleUrl: './cruise-card.component.css',
+  templateUrl: './vessel-card.component.html',
+  styleUrl: './vessel-card.component.css',
 })
-export class CruiseCardComponent {
+export class VesselCardComponent {
   @Input() vessel!: Vessel;
   @Output() cardSelected = new EventEmitter<Vessel>();
 
