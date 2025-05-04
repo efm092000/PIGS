@@ -1,6 +1,6 @@
 <app-header></app-header>
 
-<body class="bg-background mx-6 xl:mx-96 mb-20 flex flex-col gap-6">
+<body class="bg-background mx-6 xl:mx-96 flex flex-col gap-6">
   <div
     class="flex flex-col sm:flex-row justify-between items-center py-6 border-b gap-3"
   >
@@ -56,7 +56,7 @@
     </div>
   </div>
 
-  <div class="grid grid-cols-1 lg:grid-cols-2 2xl:grid-cols-3 gap-6">
+  <div class="grid grid-cols-1 lg:grid-cols-2 2xl:grid-cols-3 gap-6 mb-20">
     @for (item of filteredVessels; track $index) {
     <vessel-card-component
       [vessel]="item"
