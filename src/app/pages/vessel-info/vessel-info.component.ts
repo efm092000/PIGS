@@ -8,6 +8,8 @@ import { FooterComponent } from '../../components/footer/footer.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
 import { faArrowRight } from '@fortawesome/free-solid-svg-icons';
+import { faCircleArrowLeft } from '@fortawesome/free-solid-svg-icons';
+import { faCircleArrowRight } from '@fortawesome/free-solid-svg-icons';
 import { VesselCardComponent } from '../../components/vessel-card/vessel-card.component';
 import { FirestoreApiService } from '../../services/firestore-api/firestore-api.service';
 import { CommonModule } from '@angular/common';
@@ -33,6 +35,8 @@ export class VesselInfoComponent implements OnInit {
   sameCruiselineVessels: Vessel[] = [];
   faArrowLeft = faArrowLeft;
   faArrowRight = faArrowRight;
+  faCircleArrowLeft = faCircleArrowLeft;
+  faCircleArrowRight = faCircleArrowRight;
   isImageChanging = false;
   selectedIndex = 0;
 
