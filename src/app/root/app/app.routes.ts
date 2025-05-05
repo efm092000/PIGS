@@ -6,14 +6,15 @@ import { ShipFormComponent } from '../../components/ship-form/ship-form.componen
 import { CatalogComponent } from '../../pages/catalog/catalog.component';
 import { VesselInfoComponent } from '../../pages/vessel-info/vessel-info.component';
 import { FaqComponent } from '../../pages/faq/faq.component';
+import { SettingsComponent } from '../../pages/settings/settings.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: '/catalog', pathMatch: 'full' },
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
   { path: 'home', component: HomeComponent },
-  { path: 'form', component: ShipFormComponent },
   { path: 'catalog', component: CatalogComponent },
   { path: 'select', component: VesselInfoComponent },
   { path: 'faq', component: FaqComponent },
+  { path: 'settings', component: SettingsComponent },
 ];

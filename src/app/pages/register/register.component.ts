@@ -3,14 +3,25 @@ import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth/auth.service';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { CommonButtonComponent } from '../../components/common-button/common-button.component';
+import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
-  imports: [CommonModule, FormsModule],
+  imports: [
+    CommonModule,
+    FormsModule,
+    FontAwesomeModule,
+    CommonButtonComponent,
+  ],
   selector: 'app-register',
   templateUrl: './register.component.html',
-  //styleUrls: ['./register.component.css'],
+  styleUrls: ['./register.component.css'],
 })
 export class RegisterComponent {
+  // ICONS
+  faArrowLeft = faArrowLeft;
+
   email = '';
   password = '';
   confirmPassword = '';
@@ -24,6 +35,10 @@ export class RegisterComponent {
 
   navigateToRegister() {
     this.router.navigate(['/register']);
+  }
+
+  goBack() {
+    this.router.navigate(['/']);
   }
 
   register() {

@@ -47,7 +47,10 @@
   <div class="flex flex-row flex-nowrap items-center gap-4">
     <!-- Check if user is authenticated -->
     @if (isAuthenticated) {
-    <common-button [icon]="faUser" (action)="(null)"></common-button>
+    <common-button
+      [icon]="faUser"
+      (action)="navigateTo('settings')"
+    ></common-button>
     } @else {
     <common-button
       [text]="'login'"

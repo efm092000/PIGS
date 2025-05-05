@@ -1,23 +1,32 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { FormsModule } from '@angular/forms'; 
+import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import { NgIf } from '@angular/common';
 import { AuthService } from '../../services/auth/auth.service';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { CommonButtonComponent } from '../../components/common-button/common-button.component';
+import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
+
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [FormsModule, CommonModule, NgIf],
+  imports: [
+    FormsModule,
+    CommonModule,
+    FontAwesomeModule,
+    CommonButtonComponent,
+  ],
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css'],
 })
 export class LoginComponent {
-  email: string = '';
-  password: string = '';
-  errorMessage: string = '';
+  //ICONS
+  faArrowLeft = faArrowLeft;
+
+  email = '';
+  password = '';
+  errorMessage = '';
 
   constructor(private authService: AuthService, private router: Router) {}
-
 
   navigateToRegister() {
     this.router.navigate(['/register']);
@@ -28,17 +37,14 @@ export class LoginComponent {
   }
 
   goBack() {
-    this.router.navigate(['/']); // Navega a la página de inicio
+    this.router.navigate(['/']);
   }
 
   login() {
     if (this.email && this.password) {
       this.authService
         .login(this.email, this.password)
-        .then((userCredential) => {
-          console.log('User logged in:', userCredential);
-          this.router.navigate(['/home']);
-        })
+        .then(() => this.router.navigate(['/home']))
         .catch((error) => {
           this.errorMessage = error.message;
           console.error('Login failed:', error);

@@ -1,81 +1,87 @@
-<div class="container">
-  <!-- Botón Go Back -->
-  <button
-    type="button"
-    class="go-back-btn"
-    (click)="goBack()"
-  >
-    <span class="text-white text-xl">&larr;</span>
-  </button>
+<body class="flex items-center justify-center h-screen bg-primary">
+  <div class="flex flex-col gap-6">
+    <!-- Go Back Button -->
+    <common-button
+      [icon]="faArrowLeft"
+      [text]="'back'"
+      (action)="goBack()"
+    ></common-button>
 
-  <!-- Caja del formulario -->
-  <div class="form-box">
-    <!-- Botones de alternancia -->
-    <div class="button-box">
-      <button
-        type="button"
-        class="toggle-btn"
-        (click)="navigateToLogin()"
-      >
-        Login
-      </button>
-      <button
-        type="button"
-        class="toggle-btn"
-        (click)="navigateToRegister()"
-      >
-        Register
-      </button>
-    </div>
-
-    <!-- Formulario -->
-    <form id="login" class="space-y-4" (ngSubmit)="login()">
-      <div>
-        <label for="email" class="block text-sm font-medium text-zinc-700"
-          >Email</label
+    <!-- Login Form Box -->
+    <div
+      class="w-[370px] bg-background p-6 rounded-2xl flex flex-col items-center gap-6"
+    >
+      <!-- Toggle Buttons -->
+      <div class="w-full flex">
+        <button
+          type="button"
+          class="w-1/2 justify-center flex gap-3 text-sm px-6 py-3 uppercase font-bold rounded-l-full transition-all duration-300 ease-in-out text-secondary bg-primary"
+          (click)="navigateToLogin()"
+          disabled
         >
-        <input
-          type="email"
-          id="email"
-          name="email"
-          [(ngModel)]="email"
-          required
-          placeholder="Enter your email"
-          class="w-full border-b-2 border-slate-400 bg-transparent text-sm text-zinc-800 py-2 focus:outline-none placeholder:text-gray-400"
-        />
-      </div>
-
-      <div>
-        <label for="password" class="block text-sm font-medium text-zinc-700"
-          >Password</label
+          Login
+        </button>
+        <button
+          type="button"
+          class="w-1/2 justify-center flex gap-3 bg-secondary text-sm px-6 py-3 uppercase font-bold text-primary rounded-r-full transition-all duration-300 ease-in-out hover:shadow-lg hover:text-secondary hover:bg-primary"
+          (click)="navigateToRegister()"
         >
-        <input
-          type="password"
-          id="password"
-          name="password"
-          [(ngModel)]="password"
-          required
-          placeholder="Enter your password"
-          class="w-full border-b-2 border-slate-400 bg-transparent text-sm text-zinc-800 py-2 focus:outline-none placeholder:text-gray-400"
-        />
+          Register
+        </button>
       </div>
 
-      <div *ngIf="errorMessage" class="text-red-500 text-center text-sm">
-        <p>{{ errorMessage }}</p>
-      </div>
-
-      <button
-        type="submit"
-        id="login-form"
-        class="w-[85%] block mx-auto mt-6 py-2 bg-secondaryBg text-base rounded-full hover:bg-gradient-to-r hover:from-sky-200 hover:to-white transition"
+      <!-- Login Form -->
+      <form
+        (ngSubmit)="login()"
+        class="w-full flex flex-col items-center gap-3"
       >
-        Submit
-      </button>
-    </form>
+        <!-- Email Input -->
+        <div class="w-full">
+          <label for="email" class="block text-sm text-text_gray">Email</label>
+          <div class="w-full flex items-center border-b border-accent">
+            <input
+              type="email"
+              id="email"
+              name="email"
+              [(ngModel)]="email"
+              required
+              placeholder="Enter your email"
+              class="w-full bg-transparent py-2 text-sm text-primary focus:outline-none placeholder:text-text_gray"
+            />
+          </div>
+        </div>
 
-    <!-- Mensaje de error -->
-    <div *ngIf="errorMessage" class="error">
-      {{ errorMessage }}
+        <!-- Password Input -->
+        <div class="w-full">
+          <label for="password" class="block text-sm text-text_gray"
+            >Password</label
+          >
+          <div class="w-full flex items-center border-b border-accent">
+            <input
+              type="password"
+              id="password"
+              name="password"
+              [(ngModel)]="password"
+              required
+              placeholder="Enter your password"
+              class="w-full bg-transparent py-2 text-sm text-primary focus:outline-none placeholder:text-text_gray"
+            />
+          </div>
+        </div>
+
+        <!-- Error Message -->
+        <div *ngIf="errorMessage" class="text-red-500 text-sm text-center">
+          {{ errorMessage }}
+        </div>
+
+        <!-- Submit Button -->
+        <button
+          type="submit"
+          class="w-5/6 mt-3 bg-secondary border-2 border-secondary text-sm px-6 py-3 uppercase font-bold text-primary rounded-full transition-all duration-300 ease-in-out hover:shadow-lg hover:text-secondary hover:bg-primary"
+        >
+          Submit
+        </button>
+      </form>
     </div>
   </div>
-</div>
+</body>
