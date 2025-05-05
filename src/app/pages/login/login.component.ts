@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { FormsModule } from '@angular/forms'; 
 import { CommonModule } from '@angular/common';
 import { NgIf } from '@angular/common';
+import { AuthService } from '../../services/auth/auth.service';
 @Component({
   selector: 'app-login',
   standalone: true,
@@ -15,11 +16,8 @@ export class LoginComponent {
   password: string = '';
   errorMessage: string = '';
 
-  constructor(private router: Router) {}
+  constructor(private authService: AuthService, private router: Router) {}
 
-  login() {
-    // Lógica de inicio de sesión
-  }
 
   navigateToRegister() {
     this.router.navigate(['/register']);
@@ -31,5 +29,22 @@ export class LoginComponent {
 
   goBack() {
     this.router.navigate(['/']); // Navega a la página de inicio
+  }
+
+  login() {
+    if (this.email && this.password) {
+      this.authService
+        .login(this.email, this.password)
+        .then((userCredential) => {
+          console.log('User logged in:', userCredential);
+          this.router.navigate(['/home']);
+        })
+        .catch((error) => {
+          this.errorMessage = error.message;
+          console.error('Login failed:', error);
+        });
+    } else {
+      this.errorMessage = 'Please enter both email and password';
+    }
   }
 }

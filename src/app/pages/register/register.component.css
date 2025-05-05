@@ -17,7 +17,7 @@ body {
   align-items: center;
   height: 100vh;
   margin: 0;
-  overflow: hidden; /* Evita el scroll innecesario */
+  overflow: hidden;
 }
 
 /* Fondo del contenedor principal */
@@ -34,7 +34,7 @@ body {
 /* Caja del formulario */
 .form-box {
   width: 370px;
-  height: 480px;
+  height: 460px;
   margin: 6% auto;
   background: white;
   padding: 20px;
