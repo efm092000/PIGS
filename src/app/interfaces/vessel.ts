@@ -1,4 +1,5 @@
 export interface Vessel {
+  id: string;
   imo: number;
   name: string;
   length: number;

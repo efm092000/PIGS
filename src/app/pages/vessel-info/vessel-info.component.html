@@ -38,11 +38,14 @@
         <div class="mb-6">
           <h3 class="font-semibold mb-2">Technical Information:</h3>
           <ul class="text-sm list-disc list-inside text-gray-700 space-y-1">
+            <li><strong>IMO:</strong> {{ card1?.imo }}</li>
             <li><strong>Length:</strong> {{ card1?.length }} m</li>
             <li><strong>Width:</strong> {{ card1?.width }} m</li>
             <li><strong>Draft:</strong> {{ card1?.draft }} m</li>
-            <li><strong>Speed:</strong> {{ card1?.speed }} kn</li>
-            <li><strong>Gross Tonnage:</strong> {{ card1?.grossTonnage }}</li>
+            <li><strong>Speed:</strong> {{ card1?.speed }} knots</li>
+            <li>
+              <strong>Gross Tonnage:</strong> {{ card1?.grossTonnage }} tons
+            </li>
             <li><strong>Year:</strong> {{ card1?.year }}</li>
           </ul>
         </div>
