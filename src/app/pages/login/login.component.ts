@@ -1,28 +1,34 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { AuthService } from '../../services/auth/auth.service';
-import { FormsModule } from '@angular/forms';
+import { FormsModule } from '@angular/forms'; 
 import { CommonModule } from '@angular/common';
-
+import { NgIf } from '@angular/common';
+import { AuthService } from '../../services/auth/auth.service';
 @Component({
-  imports: [CommonModule, FormsModule],
   selector: 'app-login',
+  standalone: true,
+  imports: [FormsModule, CommonModule, NgIf],
   templateUrl: './login.component.html',
-  //styleUrls: ['./login.component.css'],
+  styleUrls: ['./login.component.css'],
 })
 export class LoginComponent {
-  email = '';
-  password = '';
-  errorMessage = '';
+  email: string = '';
+  password: string = '';
+  errorMessage: string = '';
 
   constructor(private authService: AuthService, private router: Router) {}
+
+
+  navigateToRegister() {
+    this.router.navigate(['/register']);
+  }
 
   navigateToLogin() {
     this.router.navigate(['/login']);
   }
 
-  navigateToRegister() {
-    this.router.navigate(['/register']);
+  goBack() {
+    this.router.navigate(['/']); // Navega a la página de inicio
   }
 
   login() {

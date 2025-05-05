@@ -1,0 +1,73 @@
+<div class="settings-container">
+  <!-- Header -->
+  <app-header class="responsive-header"></app-header>
+
+  <!-- Título -->
+  <h1 class="settings-title">My Account</h1>
+
+  <!-- Contenido principal -->
+  <div class="settings-content">
+    <!-- Información del usuario -->
+    <div class="user-info">
+      <div class="user-item">
+        <span class="label">Username</span>
+        <span *ngIf="!editMode" class="value">{{ userData.username }}</span>
+        <input
+          *ngIf="editMode"
+          class="edit-input"
+          type="text"
+          [value]="userData.username"
+          (input)="onInputChange('username', $event)"
+        />
+      </div>
+      <div class="user-item">
+        <span class="label">Email</span>
+        <span *ngIf="!editMode" class="value">{{ userData.email }}</span>
+        <input
+          *ngIf="editMode"
+          class="edit-input"
+          type="email"
+          [value]="userData.email"
+          (input)="onInputChange('email', $event)"
+        />
+      </div>
+      <div class="user-item">
+        <span class="label">Password</span>
+        <span *ngIf="!editMode" class="value">**********</span>
+        <input
+          *ngIf="editMode"
+          class="edit-input"
+          type="password"
+          [value]="userData.password"
+          (input)="onInputChange('password', $event)"
+        />
+      </div>
+      <div class="user-item">
+        <span class="label">List of ships</span>
+        <span *ngIf="!editMode" class="value">{{ userData.shipList }}</span>
+        <input
+          *ngIf="editMode"
+          class="edit-input"
+          type="text"
+          [value]="userData.shipList"
+          (input)="onInputChange('shipList', $event)"
+        />
+      </div>
+    </div>
+
+    <!-- Foto de perfil -->
+    <div class="profile-picture">
+      <div class="picture-placeholder"></div>
+      <input
+        *ngIf="editMode"
+        type="file"
+        (change)="updateProfilePicture($event)"
+      />
+    </div>
+  </div>
+
+  <!-- Botón único para editar -->
+  <button class="edit-btn" (click)="toggleEditMode()">
+    {{ editMode ? 'Save' : 'Edit' }}
+  </button>
+</div>

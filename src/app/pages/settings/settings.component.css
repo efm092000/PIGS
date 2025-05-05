@@ -1,0 +1,119 @@
+/* Contenedor principal */
+.settings-container {
+  padding: 0;
+  background-color: #f3f3f3;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Header */
+.header-container {
+  width: 100%;
+  position: fixed; /* Fija el header en la parte superior */
+  top: 0;
+  left: 0;
+  z-index: 1000; /* Asegura que el header esté por encima del contenido */
+}
+
+.responsive-header {
+  width: 100%;
+  max-width: 1200px;
+  padding: 10px;
+  box-sizing: border-box;
+  background-color: #1a1a2e; /* Fondo del header */
+}
+
+/* Título */
+.settings-title {
+    font-size: 28px;
+    font-weight: bold;
+    margin: 20px 0;
+    color: #333;
+    text-align: center;
+}
+
+/* Contenido principal */
+.settings-content {
+  display: flex;
+  justify-content: center; /* Centra horizontalmente los elementos */
+  align-items: center; /* Alinea verticalmente los elementos */
+  gap: 60px; /* Espaciado entre los campos y la imagen */
+  width: 100%;
+  max-width: 900px;
+  margin-top: 85px; /* Añade espacio para que el contenido no se superponga con el header */
+}
+
+/* Información del usuario */
+.user-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.user-item {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 10px;
+}
+
+.label {
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 5px;
+  font-size: 22px;
+}
+
+.value {
+  font-size: 18px;
+  color: #666;
+}
+
+.edit-input {
+  width: 100%;
+  max-width: 500px;
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 20px;
+}
+
+/* Foto de perfil */
+.profile-picture {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  flex-shrink: 0;
+}
+
+.picture-placeholder {
+  width: 350px; /* Tamaño más grande del círculo */
+  height: 350px;
+  background-color: #e0e0e0;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 16px;
+  color: #666;
+}
+
+/* Botón único */
+.edit-btn {
+  background-color: #333;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 12px 24px;
+  cursor: pointer;
+  font-size: 18px;
+  margin-top: 30px;
+}
+
+.edit-btn:hover {
+  background-color: #555;
+}

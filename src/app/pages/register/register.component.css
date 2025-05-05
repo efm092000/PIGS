@@ -17,7 +17,7 @@ body {
   align-items: center;
   height: 100vh;
   margin: 0;
-  overflow: hidden; /* Evita el scroll innecesario */
+  overflow: hidden;
 }
 
 /* Fondo del contenedor principal */
@@ -34,7 +34,7 @@ body {
 /* Caja del formulario */
 .form-box {
   width: 370px;
-  height: 480px;
+  height: 460px;
   margin: 6% auto;
   background: white;
   padding: 20px;
@@ -48,8 +48,8 @@ body {
   display: flex;
   justify-content: space-between;
   margin-bottom: 20px;
-  width: 100%; /* Asegura que ocupe todo el ancho del contenedor */
-  max-width: 240px; /* Tamaño máximo */
+  width: 100%; 
+  max-width: 240px; 
   margin: 30px auto;
   position: relative;
   box-shadow: 0 0 20px 9px #e0e0e0;

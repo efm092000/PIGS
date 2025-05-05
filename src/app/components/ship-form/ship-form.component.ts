@@ -10,6 +10,7 @@ import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
   standalone: true,
   templateUrl: './ship-form.component.html',
   styleUrls: ['./ship-form.component.css'],
+  styleUrls: ['./ship-form.component.css'],
 })
 export class ShipFormComponent implements OnInit {
   protected vessel: Vessel = {
