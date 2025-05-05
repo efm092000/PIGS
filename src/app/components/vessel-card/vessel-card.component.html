@@ -1,5 +1,5 @@
 <div
-  class="bg-white rounded-md shadow-md hover:shadow-lg transition transform hover:scale-105 overflow-hidden cursor-pointer min-w-max relative"
+  class="bg-white rounded-md shadow-md hover:shadow-lg transition transform hover:scale-105 overflow-hidden cursor-pointer min-w-max relative text-text_gray"
   (click)="onClick()"
 >
   <img
@@ -7,14 +7,22 @@
     [alt]="vessel.name"
     class="w-full h-40 object-cover"
   />
-  <div class="p-4 relative">
-    <h3 class="text-lg font-bold text-gray-800">{{ vessel.name }}</h3>
-    <p class="text-sm text-gray-600">The World Residences at Sea</p>
-    <div class="mt-2 text-xs text-gray-500 flex flex-wrap gap-x-2 gap-y-1">
-      <span class="text-nowrap">
-        Crew {{ vessel.crew }} · Passengers {{ vessel.passengerCap }} · Speed
-        {{ vessel.speed }} knots · Year {{ vessel.year }}
-      </span>
+  <div class="p-4 relative text-black">
+    <h3 class="text-lg font-bold">{{ vessel.name }}</h3>
+    <p class="text-sm">The World Residences at Sea</p>
+    <div class="mt-2 text-xs text-text_gray flex flex-col flex-nowrap gap-2">
+      <div class="flex flex-row flex-nowrap gap-3 items-center">
+        <fa-icon class="w-3 flex justify-center" [icon]="faUser"></fa-icon>
+        <p class="text-nowrap">
+          Crew {{ vessel.crew }} · Passengers {{ vessel.passengerCap }}
+        </p>
+      </div>
+      <div class="flex flex-row gap-3 flex-nowrap items-center">
+        <fa-icon class="w-3 flex justify-center" [icon]="faFile"></fa-icon>
+        <p class="text-nowrap">
+          Speed {{ vessel.speed }} knots · Year {{ vessel.year }}
+        </p>
+      </div>
     </div>
     <div class="absolute top-4 right-4" (click)="$event.stopPropagation()">
       <app-star [starId]="'star-' + vessel.imo"></app-star>
