@@ -17,7 +17,7 @@
           (click)="navigateBack()"
         ></common-button>
 
-        <app-star></app-star>
+        <app-star [vesselId]="card1?.id ?? ''"></app-star>
       </div>
 
       <!-- Name & Company -->
@@ -101,23 +101,13 @@
   <div *ngIf="sameCruiselineVessels.length > 0" class="mt-20">
     <h1 class="text-3xl font-bold">Other Ships from {{ card1?.cruiseline }}</h1>
 
-    <div
-      class="flex flex-row overflow-x-auto gap-6 scroll-smooth py-6 items-center"
-    >
-      <!-- Iterate over sameCruiselineVessels -->
-      <fa-icon
-        [icon]="faCircleArrowRight"
-        class="text-primary text-3xl"
-      ></fa-icon>
+    <div class="flex overflow-x-auto space-x-6 py-6 scrollbar-hide">
       <vessel-card-component
         *ngFor="let vessel of sameCruiselineVessels"
         [vessel]="vessel"
         (click)="selectVessel(vessel)"
+        class="min-w-[250px] max-w-[250px] flex-shrink-0"
       ></vessel-card-component>
-      <fa-icon
-        [icon]="faCircleArrowLeft"
-        class="text-primary text-3xl"
-      ></fa-icon>
     </div>
   </div>
 </div>
