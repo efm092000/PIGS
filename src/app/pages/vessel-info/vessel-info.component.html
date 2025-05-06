@@ -1,129 +1,125 @@
 <app-header></app-header>
 
-<body>
-  <div class="bg-background flex flex-col lg:px-96 p-6">
-    <!-- Main Content: Left (button + info) and Right (image) -->
-    <div
-      class="flex flex-col xl:flex-row items-start justify-between w-full xl:gap-10 mb-6"
-    >
-      <!-- Left Column: Button row + Info -->
-      <div class="flex flex-col xl:w-2/3 w-full">
-        <!-- Top Row: Back Button + Star -->
-        <div
-          class="flex items-center justify-between border-b border-accent pb-6 mb-6"
-        >
-          <common-button
-            [icon]="faArrowLeft"
-            [text]="'Back'"
-            (click)="navigateBack()"
-          ></common-button>
-
-          <app-star></app-star>
-        </div>
-
-        <!-- Name & Company -->
-        <div class="mb-6 space-y-2">
-          <div>
-            <h1 class="text-3xl font-bold">{{ card1?.name }}</h1>
-            <h2 class="text-md text-gray-600">{{ card1?.cruiseline }}</h2>
-          </div>
-
-          <!-- Description -->
-          <p class="text-gray-700 text-sm">
-            {{ card1?.description }}
-          </p>
-        </div>
-
-        <!-- Technical Info -->
-        <div class="mb-6">
-          <h3 class="font-semibold mb-2">Technical Information:</h3>
-          <ul class="text-sm list-disc list-inside text-gray-700 space-y-1">
-            <li><strong>IMO:</strong> {{ card1?.imo }}</li>
-            <li><strong>Length:</strong> {{ card1?.length }} m</li>
-            <li><strong>Width:</strong> {{ card1?.width }} m</li>
-            <li><strong>Draft:</strong> {{ card1?.draft }} m</li>
-            <li><strong>Speed:</strong> {{ card1?.speed }} knots</li>
-            <li>
-              <strong>Gross Tonnage:</strong> {{ card1?.grossTonnage }} tons
-            </li>
-            <li><strong>Year:</strong> {{ card1?.year }}</li>
-          </ul>
-        </div>
-
-        <!-- Passenger Info -->
-        <div class="mb-6">
-          <h3 class="font-semibold mb-2">Passenger Information:</h3>
-          <ul class="text-sm list-disc list-inside text-gray-700 space-y-1">
-            <li><strong>Passenger Cap:</strong> {{ card1?.passengerCap }}</li>
-            <li><strong>Crew:</strong> {{ card1?.crew }}</li>
-            <li><strong>Cabins:</strong> {{ card1?.cabins }}</li>
-          </ul>
-        </div>
-      </div>
-
-      <!-- Right Column: Image (responsive and large) -->
-      <div class="relative w-full rounded-2xl shadow-lg">
-        <!-- Left Arrow -->
-        <button
-          class="absolute left-2 top-1/2 transform -translate-y-1/2 bg-transparent text-white rounded-full p-2"
-          (click)="prevShip()"
-        >
-          <fa-icon [icon]="faArrowLeft"></fa-icon>
-        </button>
-
-        <!-- Ship Image -->
-        <img
-          [src]="selectedShip"
-          alt="Ship"
-          class="w-full h-auto object-contain rounded-xl"
-        />
-
-        <!-- Right Arrow -->
-        <button
-          class="absolute right-2 top-1/2 transform -translate-y-1/2 bg-transparent text-white rounded-full p-2"
-          (click)="nextShip()"
-        >
-          <fa-icon [icon]="faArrowRight"></fa-icon>
-        </button>
-      </div>
-    </div>
-
-    <!-- References -->
-    <div class="bg-gray-800 px-6 py-3 rounded-xl text-white text-sm space-y-2">
-      <h3 class="font-semibold">References</h3>
-      <ul class="list-disc list-inside space-y-1 text-secondary underline">
-        <li *ngFor="let ref of card1?.references">
-          <a [href]="ref" target="_blank">{{ ref }}</a>
-        </li>
-      </ul>
-    </div>
-
-    <!-- Same Cruiseline Vessels Row -->
-    <div *ngIf="sameCruiselineVessels.length > 0" class="mt-20">
-      <h1 class="text-3xl font-bold">
-        Other Ships from {{ card1?.cruiseline }}
-      </h1>
-
+<div class="bg-background flex flex-col px-3 py-12 2xl:px-96">
+  <!-- Main Content: Left (button + info) and Right (image) -->
+  <div
+    class="flex flex-col xl:flex-row items-start justify-between w-full xl:gap-10 mb-6"
+  >
+    <!-- Left Column: Button row + Info -->
+    <div class="flex flex-col xl:w-2/3 w-full">
+      <!-- Top Row: Back Button + Star -->
       <div
-        class="flex flex-row overflow-x-auto gap-6 scroll-smooth py-6 items-center"
+        class="flex items-center justify-between border-b border-accent pb-6 mb-6"
       >
-        <!-- Iterate over sameCruiselineVessels -->
-        <fa-icon
-          [icon]="faCircleArrowRight"
-          class="text-primary text-3xl"
-        ></fa-icon>
-        <vessel-card-component
-          *ngFor="let vessel of sameCruiselineVessels"
-          [vessel]="vessel"
-          (click)="selectVessel(vessel)"
-        ></vessel-card-component>
-        <fa-icon
-          [icon]="faCircleArrowLeft"
-          class="text-primary text-3xl"
-        ></fa-icon>
+        <common-button
+          [icon]="faArrowLeft"
+          [text]="'Back'"
+          (click)="navigateBack()"
+        ></common-button>
+
+        <app-star></app-star>
       </div>
+
+      <!-- Name & Company -->
+      <div class="mb-6 space-y-2">
+        <div>
+          <h1 class="text-3xl font-bold">{{ card1?.name }}</h1>
+          <h2 class="text-md text-gray-600">{{ card1?.cruiseline }}</h2>
+        </div>
+
+        <!-- Description -->
+        <p class="text-gray-700 text-sm">
+          {{ card1?.description }}
+        </p>
+      </div>
+
+      <!-- Technical Info -->
+      <div class="mb-6">
+        <h3 class="font-semibold mb-2">Technical Information:</h3>
+        <ul class="text-sm list-disc list-inside text-gray-700 space-y-1">
+          <li><strong>IMO:</strong> {{ card1?.imo }}</li>
+          <li><strong>Length:</strong> {{ card1?.length }} m</li>
+          <li><strong>Width:</strong> {{ card1?.width }} m</li>
+          <li><strong>Draft:</strong> {{ card1?.draft }} m</li>
+          <li><strong>Speed:</strong> {{ card1?.speed }} knots</li>
+          <li>
+            <strong>Gross Tonnage:</strong> {{ card1?.grossTonnage }} tons
+          </li>
+          <li><strong>Year:</strong> {{ card1?.year }}</li>
+        </ul>
+      </div>
+
+      <!-- Passenger Info -->
+      <div class="mb-6">
+        <h3 class="font-semibold mb-2">Passenger Information:</h3>
+        <ul class="text-sm list-disc list-inside text-gray-700 space-y-1">
+          <li><strong>Passenger Cap:</strong> {{ card1?.passengerCap }}</li>
+          <li><strong>Crew:</strong> {{ card1?.crew }}</li>
+          <li><strong>Cabins:</strong> {{ card1?.cabins }}</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Right Column: Image (responsive and large) -->
+    <div class="relative w-full rounded-2xl shadow-lg">
+      <!-- Left Arrow -->
+      <button
+        class="absolute left-2 top-1/2 transform -translate-y-1/2 bg-transparent text-white rounded-full p-2"
+        (click)="prevShip()"
+      >
+        <fa-icon [icon]="faArrowLeft"></fa-icon>
+      </button>
+
+      <!-- Ship Image -->
+      <img
+        [src]="selectedShip"
+        alt="Ship"
+        class="w-full h-auto object-contain rounded-xl"
+      />
+
+      <!-- Right Arrow -->
+      <button
+        class="absolute right-2 top-1/2 transform -translate-y-1/2 bg-transparent text-white rounded-full p-2"
+        (click)="nextShip()"
+      >
+        <fa-icon [icon]="faArrowRight"></fa-icon>
+      </button>
     </div>
   </div>
-</body>
+
+  <!-- References -->
+  <div class="bg-gray-800 px-6 py-3 rounded-xl text-white text-sm space-y-2">
+    <h3 class="font-semibold">References</h3>
+    <ul class="list-disc list-inside space-y-1 text-secondary underline">
+      <li *ngFor="let ref of card1?.references">
+        <a [href]="ref" target="_blank">{{ ref }}</a>
+      </li>
+    </ul>
+  </div>
+
+  <!-- Same Cruiseline Vessels Row -->
+  <div *ngIf="sameCruiselineVessels.length > 0" class="mt-20">
+    <h1 class="text-3xl font-bold">Other Ships from {{ card1?.cruiseline }}</h1>
+
+    <div
+      class="flex flex-row overflow-x-auto gap-6 scroll-smooth py-6 items-center"
+    >
+      <!-- Iterate over sameCruiselineVessels -->
+      <fa-icon
+        [icon]="faCircleArrowRight"
+        class="text-primary text-3xl"
+      ></fa-icon>
+      <vessel-card-component
+        *ngFor="let vessel of sameCruiselineVessels"
+        [vessel]="vessel"
+        (click)="selectVessel(vessel)"
+      ></vessel-card-component>
+      <fa-icon
+        [icon]="faCircleArrowLeft"
+        class="text-primary text-3xl"
+      ></fa-icon>
+    </div>
+  </div>
+</div>
 
 <app-footer></app-footer>
