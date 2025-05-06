@@ -1,11 +1,6 @@
 <!-- Dropdown  -->
 <div
-  [ngClass]="{
-    'w-full min-w-fit mx-auto hover:shadow-md transition-shadow duration-300 ease-in-out rounded-full':
-      !isOpen,
-    'w-full min-w-fit mx-auto hover:shadow-md transition-shadow duration-300 ease-in-out rounded-3xl':
-      isOpen
-  }"
+  class="w-full min-w-fit mx-auto hover:shadow-md transition-shadow duration-300 ease-in-out rounded-md"
   tabindex="0"
   (keydown.enter)="isOpen = !isOpen"
   role="button"
@@ -14,8 +9,8 @@
   <div
     class="flex justify-between items-center gap-3 px-6 py-3 cursor-pointer bg-accent hover:bg-secondary transition-colors duration-300 ease-in-out"
     [ngClass]="{
-      'rounded-full': !isOpen,
-      'rounded-t-3xl rounded-b-none': isOpen
+      'rounded-md': !isOpen,
+      'rounded-t-md rounded-b-none': isOpen
     }"
     (click)="isOpen = !isOpen"
   >
@@ -29,7 +24,7 @@
   <!-- Dropdown Body -->
   <div
     *ngIf="isOpen"
-    class="px-6 py-3 bg-background border rounded-b-3xl transition-all duration-300 ease-in-out"
+    class="px-6 py-3 bg-background border rounded-b-md transition-all duration-300 ease-in-out"
   >
     {{ body }}
   </div>
