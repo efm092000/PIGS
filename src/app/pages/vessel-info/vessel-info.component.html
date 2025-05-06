@@ -89,10 +89,12 @@
 
   <!-- References -->
   <div class="bg-gray-800 px-6 py-3 rounded-xl text-white text-sm space-y-2">
-    <h3 class="font-semibold">References</h3>
-    <ul class="list-disc list-inside space-y-1 text-secondary underline">
+    <h3 class="font-semibold uppercase">References</h3>
+    <ul class="list-decimal list-inside space-y-3 text-secondary">
       <li *ngFor="let ref of card1?.references">
-        <a [href]="ref" target="_blank">{{ ref }}</a>
+        <a [href]="ref" target="_blank" class="break-all underline"
+          >{{ ref }}
+        </a>
       </li>
     </ul>
   </div>
