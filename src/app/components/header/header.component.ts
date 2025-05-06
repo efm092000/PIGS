@@ -37,10 +37,20 @@ export class HeaderComponent implements OnInit {
     this.authService.getUser().subscribe((user) => {
       this.isAuthenticated = !!user; // Set to true if the user exists, false otherwise
     });
+
+    this.reloadCurrentPage();
   }
 
   navigateTo(url: string) {
     this.router.navigate([url]);
     localStorage.setItem('returnUrl', this.router.url);
+  }
+
+  reloadCurrentPage() {
+    // Navigate to the current route
+    this.router.navigate([this.router.url]).then(() => {
+      // Optionally, do something after the navigation is complete (like resetting state, etc.)
+      console.log('Navigated to the same route');
+    });
   }
 }

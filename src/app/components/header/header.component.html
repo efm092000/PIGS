@@ -1,10 +1,13 @@
 <header
-  class="bg-primary shadow-md sticky top-0 z-50 flex flex-row flex-nowrap items-center justify-between px-9 py-3 shadow-xl border-b border-secondary"
+  class="bg-primary shadow-md sticky top-0 z-50 flex flex-row items-center justify-between px-3 py-3 shadow-xl border-b border-secondary md:px-9"
 >
   <!-- Navigation -->
-  <nav class="flex flex-row flex-nowrap items-center gap-6">
+  <nav class="flex flex-row gap-6 items-center">
     <!-- Logo -->
-    <a (click)="navigateTo('home')" class="flex items-center">
+    <a
+      (click)="navigateTo('home')"
+      class="flex items-center hidden md:inline-block"
+    >
       <img
         src="./image/logobarcos.png"
         alt="Logo"
@@ -21,7 +24,6 @@
       class="cursor-pointer"
       >Home</a
     >
-
     <a
       (click)="navigateTo('catalog')"
       [ngClass]="{
@@ -31,7 +33,6 @@
       class="cursor-pointer"
       >Catalogue</a
     >
-
     <a
       (click)="navigateTo('faq')"
       [ngClass]="{
@@ -44,31 +45,25 @@
   </nav>
 
   <!-- User/Login Section -->
-  <div class="flex flex-row flex-nowrap items-center gap-4">
-    <!-- Check if user is authenticated -->
-    @if (isAuthenticated) {
+  <div class="flex flex-row gap-4 items-center">
     <common-button
-      [icon]="faUser"
-      (action)="navigateTo('settings')"
+      [text]="isAuthenticated ? 'profile' : 'login'"
+      [icon]="isAuthenticated ? faUser : faSignIn"
+      (action)="isAuthenticated ? navigateTo('settings') : navigateTo('login')"
     ></common-button>
-    } @else {
+
     <common-button
-      [text]="'login'"
-      [icon]="faSignIn"
-      (action)="navigateTo('login')"
-    ></common-button>
-    } @if (isAuthenticated) {
-    <common-button
+      *ngIf="isAuthenticated"
       [text]="'log-out'"
       [icon]="faSignOut"
       (action)="userLogout()"
-      class="md:flex gap-2 md:block hidden"
+      class="md:block hidden"
     ></common-button>
     <common-button
+      *ngIf="isAuthenticated"
       [icon]="faSignOut"
       (action)="userLogout()"
       class="md:hidden"
     ></common-button>
-    }
   </div>
 </header>
