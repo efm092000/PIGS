@@ -1,7 +1,16 @@
 <button
   (click)="onClick()"
-  class="flex flex-row flex-nowrap gap-3 bg-secondary border-2 border-secondary text-sm px-6 py-3 w-min h-min text-nowrap uppercase font-bold text-primary rounded-full transition-all duration-300 ease-in-out hover:shadow-lg hover:text-secondary hover:border-secondary hover:border-2 hover:bg-primary"
+  class="flex flex-row items-center gap-3 bg-secondary border-2 border-secondary text-sm px-6 py-3 w-min h-min text-nowrap uppercase font-bold text-primary rounded-full transition-all duration-300 ease-in-out hover:shadow-lg hover:text-secondary hover:border-secondary hover:bg-primary"
 >
-  <span *ngIf="text" class="hidden md:inline-block">{{ text }}</span>
+  <span
+    *ngIf="text"
+    [ngClass]="{
+      'hidden md:inline-block': icon,
+      'inline-block': !icon
+    }"
+  >
+    {{ text }}
+  </span>
+
   <fa-icon *ngIf="icon" [icon]="icon"></fa-icon>
 </button>
