@@ -1,5 +1,11 @@
 <label [for]="starId" class="cursor-pointer">
-  <input type="checkbox" [id]="starId" (click)="toggleCheck()" class="hidden" />
+  <input
+    type="checkbox"
+    [id]="starId"
+    (click)="toggleCheck()"
+    class="hidden"
+    [checked]="isChecked"
+  />
   <fa-icon
     [icon]="faStar"
     [ngClass]="isChecked ? 'text-yellow-500 text-2xl' : 'text-accent text-2xl'"

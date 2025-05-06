@@ -49,7 +49,7 @@ export class RegisterComponent {
 
     if (this.email && this.password) {
       this.authService
-        .register(this.email, this.password)
+        .signup(this.email, this.password, 'TESTEO1')
         .then((userCredential) => {
           console.log('User registered:', userCredential);
           this.router.navigate(['/home']);
