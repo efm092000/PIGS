@@ -1,4 +1,4 @@
-<label class="cursor-pointer">
+<label *ngIf="user" class="cursor-pointer" [ngClass]="{ 'star-hidden': !user }">
   <input
     type="checkbox"
     (click)="toggleCheck()"
