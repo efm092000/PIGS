@@ -1,12 +1,13 @@
-import { CommonModule } from '@angular/common';
 import { Component, Input, OnInit } from '@angular/core';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faStar } from '@fortawesome/free-solid-svg-icons';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
+import { CommonModule } from '@angular/common';
+import { UserProfileService } from '../../services/user-profile-api/user-profile-api.service';
 
 interface User {
-  likedVessels: { id: string }[]; // Liked vessels structure
+  likedVessels: string[]; // Liked vessels structure as an array of strings
 }
 
 @Component({
@@ -16,19 +17,20 @@ interface User {
   styleUrls: ['./star.component.css'],
 })
 export class StarComponent implements OnInit {
-  @Input() starId!: string; // Unique ID for each star button (e.g., vessel ID)
   @Input() vesselId!: string; // ID of the vessel being liked
   faStar = faStar;
   isChecked = false; // Track if the star is checked or not
   user: any;
 
+  // Inject the necessary services through the constructor
   constructor(
     private firestore: AngularFirestore,
-    private afAuth: AngularFireAuth
+    private afAuth: AngularFireAuth, // Inject Auth service through the constructor
+    private userProfileService: UserProfileService // Inject the UserProfileService
   ) {}
 
   ngOnInit() {
-    // Subscribe to user authentication state
+    console.log('Vessel ID:', this.vesselId); // Add this line to verify vesselId
     this.afAuth.authState.subscribe((user) => {
       if (user) {
         this.user = user;
@@ -39,50 +41,68 @@ export class StarComponent implements OnInit {
 
   // Check if the user already liked this vessel
   checkIfLiked() {
-    const userRef = this.firestore.collection('users').doc(this.user?.uid);
-
-    userRef.get().subscribe((doc) => {
-      const data = doc.data() as User; // Cast to the User interface
-      if (data && data.likedVessels) {
-        // Check if the vessel is in the likedVessels array
-        this.isChecked = data.likedVessels.some(
-          (vessel) => vessel.id === this.vesselId
-        );
-      }
-    });
+    this.userProfileService
+      .getUserProfile(this.user?.uid)
+      .then((profile) => {
+        if (profile) {
+          console.log('Liked vessels:', profile.likedVessels);
+          console.log('This vessel:', this.vesselId); // Add this line to log the liked vessels
+          this.isChecked = profile.likedVessels.includes(this.vesselId);
+        }
+      })
+      .catch((error) => {
+        console.error('Error fetching user profile:', error);
+      });
   }
 
   // Toggle the like status
   toggleCheck() {
-    this.isChecked = !this.isChecked;
+    this.isChecked = !this.isChecked; // Toggle the check state
 
     if (this.user) {
-      const userRef = this.firestore.collection('users').doc(this.user.uid);
+      // Fetch the user profile
+      this.userProfileService
+        .getUserProfile(this.user.uid)
+        .then((profile) => {
+          if (profile) {
+            // Ensure likedVessels is an array
+            let likedVessels = Array.isArray(profile.likedVessels)
+              ? profile.likedVessels
+              : [];
 
-      userRef.get().subscribe((doc) => {
-        const data = doc.data() as User; // Cast to the User interface
-        let likedVessels = data?.likedVessels || [];
+            // Add or remove the vesselId from likedVessels based on isChecked
+            if (this.isChecked) {
+              // Add the vesselId if it's not already in the list
+              if (!likedVessels.includes(this.vesselId)) {
+                likedVessels.push(this.vesselId);
+              }
+            } else {
+              // Remove the vesselId from the list
+              likedVessels = likedVessels.filter((id) => id !== this.vesselId);
+            }
 
-        if (this.isChecked) {
-          // Add the vessel to the likedVessels array
-          likedVessels.push({ id: this.vesselId });
-        } else {
-          // Remove the vessel from the likedVessels array
-          likedVessels = likedVessels.filter(
-            (vessel) => vessel.id !== this.vesselId
-          );
-        }
-
-        // Update the user's liked vessels in Firestore
-        userRef
-          .update({ likedVessels })
-          .then(() => {
-            console.log(this.isChecked ? 'Vessel liked!' : 'Vessel unliked!');
-          })
-          .catch((error) => {
-            console.error('Error updating liked vessels:', error);
-          });
-      });
+            // Ensure that likedVessels is defined and not null
+            if (likedVessels !== undefined && likedVessels !== null) {
+              this.userProfileService
+                .updateLikedVessels(this.user.uid, likedVessels)
+                .then(() => {
+                  console.log(
+                    this.isChecked ? 'Vessel liked!' : 'Vessel unliked!'
+                  );
+                })
+                .catch((error) => {
+                  console.error('Error updating liked vessels:', error);
+                });
+            } else {
+              console.error('likedVessels is undefined or null');
+            }
+          } else {
+            console.error('User profile not found');
+          }
+        })
+        .catch((error) => {
+          console.error('Error fetching user profile:', error);
+        });
     } else {
       console.log('User not logged in');
     }

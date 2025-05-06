@@ -22,6 +22,7 @@ export class RegisterComponent {
   // ICONS
   faArrowLeft = faArrowLeft;
 
+  user_name = '';
   email = '';
   password = '';
   confirmPassword = '';
@@ -47,9 +48,9 @@ export class RegisterComponent {
       return;
     }
 
-    if (this.email && this.password) {
+    if (this.email && this.password && this.user_name) {
       this.authService
-        .signup(this.email, this.password, 'TESTEO1')
+        .signup(this.email, this.password, this.user_name)
         .then((userCredential) => {
           console.log('User registered:', userCredential);
           this.router.navigate(['/home']);
@@ -58,8 +59,14 @@ export class RegisterComponent {
           this.errorMessage = error.message;
           console.error('Registration failed:', error);
         });
+    } else if (!this.user_name) {
+      this.errorMessage = 'Please enter user name';
+    } else if (!this.email) {
+      this.errorMessage = 'Please enter email';
+    } else if (!this.password) {
+      this.errorMessage = 'Please enter password';
     } else {
-      this.errorMessage = 'Please enter both email and password';
+      this.errorMessage = 'Missing fields';
     }
   }
 }

@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { User } from 'firebase/auth';
 import { Observable } from 'rxjs';
-import { FirestoreApiService } from '../firestore-api/firestore-api.service';
 import { UserProfile } from '../../interfaces/user-profile';
 import { UserProfileService } from '../user-profile-api/user-profile-api.service';
 
@@ -12,7 +11,6 @@ import { UserProfileService } from '../user-profile-api/user-profile-api.service
 export class AuthService {
   constructor(
     private _auth: AngularFireAuth,
-    private firestoreApi: FirestoreApiService,
     private userProfileApi: UserProfileService
   ) {}
 

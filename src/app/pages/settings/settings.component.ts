@@ -1,72 +1,95 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { CommonButtonComponent } from '../../components/common-button/common-button.component';
+import { UserProfile } from '../../interfaces/user-profile';
+import { UserProfileService } from '../../services/user-profile-api/user-profile-api.service';
+import { HeaderComponent } from '../../components/header/header.component';
+import { FooterComponent } from '../../components/footer/footer.component';
+import { inject } from '@angular/core';
+import { Auth, User, onAuthStateChanged } from '@angular/fire/auth';
 import { CommonModule } from '@angular/common';
-import { HeaderComponent } from "../../components/header/header.component";
 
-// Define the type for the keys of isEditing outside the class
-type EditableFields = 'username' | 'email' | 'password' | 'shipList' | 'profilePicture';
+// import Firebase Auth if you want current UID
+
+type EditableFields = 'username' | 'shipList';
 
 @Component({
+  imports: [
+    CommonButtonComponent,
+    HeaderComponent,
+    FooterComponent,
+    CommonModule,
+  ],
   selector: 'app-settings',
-  standalone: true,
-  imports: [CommonModule, HeaderComponent],
   templateUrl: './settings.component.html',
   styleUrls: ['./settings.component.css'],
 })
-export class SettingsComponent {
-  // User data (simulated, replace with real database data)
-  userData = {
-    username: 'lorem ipsum',
-    email: 'lorem@ipsum.com',
-    password: '**********',
-    shipList: 'Ship 1, Ship 2',
-    profilePicture: '',
+export class SettingsComponent implements OnInit {
+  constructor(private userProfileService: UserProfileService) {}
+
+  auth: Auth = inject(Auth);
+
+  userData: any = {
+    uid: 'user123', // Replace with auth UID dynamically
+    username: '',
+    email: '', // Display only
+    password: '', // Display only
+    shipList: '',
   };
 
-  // Editing state for individual fields
   isEditing: Record<EditableFields, boolean> = {
     username: false,
-    email: false,
-    password: false,
     shipList: false,
-    profilePicture: false,
   };
 
-  // Global editing state
-  editMode = false;
+  ngOnInit() {
+    onAuthStateChanged(this.auth, (user: User | null) => {
+      if (user) {
+        this.userData.uid = user.uid;
+        this.userData.email = user.email || '';
+        this.userData.password = '**********'; // just for display
 
-  // Toggle global edit mode
-  toggleEditMode() {
-    this.editMode = !this.editMode;
-
-    // Enable or disable editing for all fields
-    Object.keys(this.isEditing).forEach((key) => {
-      this.isEditing[key as EditableFields] = this.editMode;
+        // Get profile from Firestore
+        this.userProfileService.getUserProfile(user.uid).then((profile) => {
+          if (profile) {
+            this.userData.username = profile.name;
+            this.userData.shipList = profile.likedVessels.join(', ');
+          }
+        });
+      } else {
+        // Not logged in — handle redirect or error state
+        console.warn('User not logged in');
+      }
     });
-
-    // If exiting edit mode, save all changes
-    if (!this.editMode) {
-      this.saveAllChanges();
-    }
   }
 
-  // Save all changes (placeholder for actual implementation)
-  saveAllChanges() {
-    console.log('Saving all changes:', this.userData);
+  toggleFieldEdit(field: EditableFields) {
+    Object.keys(this.isEditing).forEach((key) => {
+      this.isEditing[key as EditableFields] = key === field;
+    });
   }
 
-  // Handle input changes
   onInputChange(field: EditableFields, event: Event) {
     const input = event.target as HTMLInputElement;
     this.userData[field] = input.value;
   }
 
-  // Update profile picture
-  updateProfilePicture(event: Event) {
-    const input = event.target as HTMLInputElement;
-    if (input.files && input.files[0]) {
-      const file = input.files[0];
-      console.log('New profile picture selected:', file);
-      // TODO: Implement backend integration for uploading the profile picture
+  saveField(field: EditableFields) {
+    if (field === 'username' || field === 'shipList') {
+      const updatedProfile: UserProfile = {
+        uid: this.userData.uid,
+        name: this.userData.username,
+        companyVerified: false,
+        likedVessels: this.userData.shipList
+          .split(',')
+          .map((s: string) => s.trim())
+          .filter((s: string) => !!s),
+      };
+
+      this.userProfileService
+        .createOrUpdateUserProfile(updatedProfile)
+        .then(() => {
+          this.isEditing[field] = false;
+        });
     }
   }
 }

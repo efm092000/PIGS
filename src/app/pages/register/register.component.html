@@ -35,6 +35,23 @@
         class="w-full flex flex-col items-center gap-3"
         (ngSubmit)="register()"
       >
+        <!-- User Name Input -->
+        <div class="w-full">
+          <label for="user_name" class="block text-sm text-text_gray"
+            >User Name</label
+          >
+          <div class="w-full flex items-center border-b border-accent">
+            <input
+              type="text"
+              id="user_name"
+              name="user_name"
+              [(ngModel)]="user_name"
+              required
+              placeholder="Enter your user name"
+              class="w-full bg-transparent py-2 text-sm text-primary focus:outline-none placeholder:text-text_gray"
+            />
+          </div>
+        </div>
         <!-- Email Input -->
         <div class="w-full">
           <label for="email" class="block text-sm text-text_gray">Email</label>

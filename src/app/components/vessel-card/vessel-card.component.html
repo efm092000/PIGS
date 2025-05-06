@@ -9,7 +9,7 @@
   />
   <div class="p-4 relative text-black">
     <h3 class="text-lg font-bold">{{ vessel.name }}</h3>
-    <p class="text-sm">The World Residences at Sea</p>
+    <p class="text-sm">{{ vessel.cruiseline }}</p>
     <div class="mt-2 text-xs text-text_gray flex flex-col flex-nowrap gap-2">
       <div class="flex flex-row flex-nowrap gap-3 items-center">
         <fa-icon class="w-3 flex justify-center" [icon]="faUser"></fa-icon>
@@ -25,7 +25,7 @@
       </div>
     </div>
     <div class="absolute top-4 right-4" (click)="$event.stopPropagation()">
-      <app-star [starId]="'star-' + vessel.imo"></app-star>
+      <app-star [vesselId]="vessel.id"></app-star>
     </div>
   </div>
 </div>
