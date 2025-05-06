@@ -1,5 +1,14 @@
+<!-- Dropdown  -->
 <div
-  class="w-full min-w-fit mx-auto hover:shadow-md transition-shadow duration-300 ease-in-out rounded-full"
+  [ngClass]="{
+    'w-full min-w-fit mx-auto hover:shadow-md transition-shadow duration-300 ease-in-out rounded-full':
+      !isOpen,
+    'w-full min-w-fit mx-auto hover:shadow-md transition-shadow duration-300 ease-in-out rounded-3xl':
+      isOpen
+  }"
+  tabindex="0"
+  (keydown.enter)="isOpen = !isOpen"
+  role="button"
 >
   <!-- Dropdown Header -->
   <div

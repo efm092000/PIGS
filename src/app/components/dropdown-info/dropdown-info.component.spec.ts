@@ -8,9 +8,8 @@ describe('DropdownInfoComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [DropdownInfoComponent]
-    })
-    .compileComponents();
+      imports: [DropdownInfoComponent],
+    }).compileComponents();
 
     fixture = TestBed.createComponent(DropdownInfoComponent);
     component = fixture.componentInstance;
