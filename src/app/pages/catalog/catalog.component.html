@@ -1,8 +1,8 @@
 <app-header></app-header>
 
-<body class="bg-background mx-6 xl:mx-96 flex flex-col gap-6">
+<body class="bg-background px-3 py-12 2xl:px-96 flex flex-col gap-6">
   <div
-    class="flex flex-col sm:flex-row justify-between items-center py-6 border-b gap-3"
+    class="flex flex-row sm:flex-row justify-between items-center py-6 border-b gap-3"
   >
     <search-component (searchChanged)="updateSearch($event)"></search-component>
 
@@ -14,11 +14,11 @@
           (click)="toggleDropdown()"
           [ngClass]="
             showDropdown
-              ? 'flex items-center gap-2 px-6 py-3 bg-accent text-primary rounded-tl-3xl rounded-b-none hover:bg-secondary focus:outline-none whitespace-nowrap'
-              : 'flex items-center gap-2 px-6 py-3 bg-accent text-primary rounded-l-full hover:bg-secondary focus:outline-none whitespace-nowrap'
+              ? 'flex items-center gap-2 pl-6 pr-3 py-3 bg-accent text-primary rounded-tl-3xl rounded-b-none hover:bg-secondary focus:outline-none whitespace-nowrap'
+              : 'flex items-center gap-2 pl-6 pr-3 py-3 bg-accent text-primary rounded-l-full hover:bg-secondary focus:outline-none whitespace-nowrap'
           "
         >
-          <span>Sort by:</span>
+          <span>Sort:</span>
           <span class="font-semibold">{{ currentSort }}</span>
         </button>
 
@@ -26,8 +26,8 @@
           (click)="toggleSortDirection()"
           [ngClass]="
             showDropdown
-              ? 'px-6 py-3 bg-accent text-primary rounded-tr-3xl rounded-b-none hover:bg-secondary focus:outline-none'
-              : 'px-6 py-3 bg-accent text-primary rounded-r-full hover:bg-secondary focus:outline-none'
+              ? 'pr-6 pl-3 py-3 bg-accent text-primary rounded-tr-3xl rounded-b-none hover:bg-secondary focus:outline-none'
+              : 'pr-6 pl-3 py-3 bg-accent text-primary rounded-r-full hover:bg-secondary focus:outline-none'
           "
         >
           <fa-icon
