@@ -1,93 +1,107 @@
 <app-header></app-header>
 
-<div
-  class="flex flex-col items-center min-h-screen bg-gray-100 px-3 py-12 2xl:px-96"
->
-  <h1 class="text-2xl font-bold text-center text-gray-800 mt-5">My Account</h1>
-
-  <div
-    class="flex flex-col md:flex-row items-center justify-center gap-16 w-full max-w-5xl mt-24"
-  >
-    <!-- Display Only Fields -->
-    <div class="flex flex-col gap-5 flex-1">
-      <!-- Email (Display Only) -->
-      <div class="flex flex-col items-start gap-2">
-        <span class="font-bold text-gray-800 text-xl">Email</span>
-        <span class="text-lg text-gray-600">{{ userData.email }}</span>
-      </div>
-
-      <!-- Password (Display Only) -->
-      <div class="flex flex-col items-start gap-2">
-        <span class="font-bold text-gray-800 text-xl">Password</span>
-        <span class="text-lg text-gray-600">**********</span>
-      </div>
-
-      <!-- Ship List (Editable) -->
-      <div class="flex flex-col items-start gap-2">
-        <span class="font-bold text-gray-800 text-xl">List of ships</span>
-        <div class="flex items-center gap-4 w-full max-w-xl">
-          <ng-container *ngIf="!isEditing.shipList; else editShipList">
-            <span class="text-lg text-gray-600 flex-1">{{
-              userData.shipList
-            }}</span>
-            <common-button
-              [text]="'Edit'"
-              (click)="toggleFieldEdit('shipList')"
-            ></common-button>
-          </ng-container>
-          <ng-template #editShipList>
-            <input
-              class="w-full p-3 border border-gray-300 rounded text-lg"
-              type="text"
-              [value]="userData.shipList"
-              (input)="onInputChange('shipList', $event)"
-            />
-            <common-button
-              [text]="'Save'"
-              (click)="saveField('shipList')"
-            ></common-button>
-          </ng-template>
-        </div>
-      </div>
-
-      <!-- Username (Editable) -->
-      <div class="flex flex-col items-start gap-2">
-        <span class="font-bold text-gray-800 text-xl">Username</span>
-        <div class="flex items-center gap-4 w-full max-w-xl">
-          <ng-container *ngIf="!isEditing.username; else editUsername">
-            <span class="text-lg text-gray-600 flex-1">{{
-              userData.username
-            }}</span>
-            <common-button
-              [text]="'Edit'"
-              (click)="toggleFieldEdit('username')"
-            ></common-button>
+<div class="bg-background px-3 py-12 2xl:px-96 flex flex-col gap-16">
+  <div class="flex flex-col gap-6">
+    <div>
+      <h1 class="text-2xl font-bold text-primary">My Account</h1>
+      <p class="text-sm text_text_gray">
+        Manage your personal details and update your profile information.
+      </p>
+    </div>
+    <div class="flex flex-row flex-nowrap gap-24 items-start">
+      <!-- Inputs Section -->
+      <div class="flex flex-col w-full max-w-64 gap-6">
+        <!-- Username -->
+        <div class="flex flex-col">
+          <label class="font-bold text-primary text-xs uppercase"
+            >Username</label
+          >
+          <ng-container *ngIf="!isEditing; else editUsername">
+            <span class="text-base text_gray">{{ userData.username }}</span>
           </ng-container>
           <ng-template #editUsername>
             <input
-              class="w-full p-3 border border-gray-300 rounded text-lg"
               type="text"
               [value]="userData.username"
               (input)="onInputChange('username', $event)"
+              class="w-full bg-transparent py-2 text-sm text-primary border-b border-accent placeholder:text-text_gray focus:outline-none"
             />
-            <common-button
-              [text]="'Save'"
-              (click)="saveField('username')"
-            ></common-button>
+          </ng-template>
+        </div>
+
+        <!-- Email -->
+        <div class="flex flex-col">
+          <label class="font-bold text-primary text-xs uppercase">Email</label>
+          <ng-container *ngIf="!isEditing; else editEmail">
+            <span class="text-base text_gray">{{ userData.email }}</span>
+          </ng-container>
+          <ng-template #editEmail>
+            <input
+              type="text"
+              [value]="userData.email"
+              disabled
+              class="w-full bg-transparent py-2 text-sm text-primary border-b border-accent placeholder:text-text_gray focus:outline-none"
+            />
+          </ng-template>
+        </div>
+
+        <!-- Password -->
+        <div class="flex flex-col">
+          <label class="font-bold text-primary text-xs uppercase"
+            >Password</label
+          >
+          <ng-container *ngIf="!isEditing; else editPassword">
+            <span class="text-base text_gray">{{ userData.password }}</span>
+          </ng-container>
+          <ng-template #editPassword>
+            <input
+              type="password"
+              [value]="userData.password"
+              disabled
+              class="w-full bg-transparent py-2 text-sm text-primary border-b border-accent placeholder:text-text_gray focus:outline-none"
+            />
           </ng-template>
         </div>
       </div>
+
+      <!-- Profile Image Section -->
+      <div class="flex flex-col gap-4">
+        <div
+          class="w-[100px] h-[100px] md:w-[200px] md:h-[200px] bg-accent rounded-full flex items-center justify-center text-text_gray text-center"
+        >
+          Profile Image
+        </div>
+        <ng-container *ngIf="isEditing">
+          <input type="file" accept="image/*" class="text-sm text-primary" />
+        </ng-container>
+      </div>
     </div>
 
-    <!-- Profile Picture Placeholder (Not Active Yet) -->
-    <div class="flex flex-col items-center gap-3 shrink-0">
-      <div
-        class="w-[350px] h-[350px] bg-gray-300 rounded-full flex items-center justify-center text-gray-600 text-base"
-      >
-        Profile Image
-      </div>
-      <!-- No edit functionality implemented yet -->
+    <!-- Centered Buttons -->
+
+    <common-button
+      *ngIf="!isEditing"
+      text="Edit Profile"
+      (click)="toggleEdit()"
+    ></common-button>
+    <common-button
+      *ngIf="isEditing"
+      text="Save Changes"
+      (click)="saveChanges()"
+    ></common-button>
+  </div>
+
+  <!-- Ships Component -->
+  <div class="flex flex-col gap-6">
+    <div>
+      <h1 class="text-2xl font-bold text-primary">Liked Ships</h1>
+      <p class="text-sm text_text_gray">
+        A list of ships you’ve liked and saved to your profile.
+      </p>
     </div>
+    <list-of-ships-component
+      [likedVesselIds]="userData.shipList"
+    ></list-of-ships-component>
   </div>
 </div>
 

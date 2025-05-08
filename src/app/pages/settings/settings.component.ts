@@ -1,95 +1,91 @@
-import { Component, OnInit } from '@angular/core';
-import { CommonButtonComponent } from '../../components/common-button/common-button.component';
-import { UserProfile } from '../../interfaces/user-profile';
-import { UserProfileService } from '../../services/user-profile-api/user-profile-api.service';
-import { HeaderComponent } from '../../components/header/header.component';
-import { FooterComponent } from '../../components/footer/footer.component';
-import { inject } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { Auth, User, onAuthStateChanged } from '@angular/fire/auth';
 import { CommonModule } from '@angular/common';
 
-// import Firebase Auth if you want current UID
+import { CommonButtonComponent } from '../../components/common-button/common-button.component';
+import { HeaderComponent } from '../../components/header/header.component';
+import { FooterComponent } from '../../components/footer/footer.component';
+import { ListOfShipsComponent } from '../../components/list-of-ships/list-of-ships.component';
 
-type EditableFields = 'username' | 'shipList';
+import { UserProfile } from '../../interfaces/user-profile';
+import { UserProfileService } from '../../services/user-profile-api/user-profile-api.service';
+
+type EditableFields = 'username';
 
 @Component({
-  imports: [
-    CommonButtonComponent,
-    HeaderComponent,
-    FooterComponent,
-    CommonModule,
-  ],
   selector: 'app-settings',
   templateUrl: './settings.component.html',
   styleUrls: ['./settings.component.css'],
+  standalone: true,
+  imports: [
+    CommonModule,
+    CommonButtonComponent,
+    HeaderComponent,
+    FooterComponent,
+    ListOfShipsComponent,
+  ],
 })
 export class SettingsComponent implements OnInit {
+  private auth: Auth = inject(Auth);
+
+  userData: {
+    uid: string;
+    username: string;
+    email: string;
+    password: string;
+    shipList: string[];
+  } = {
+    uid: '',
+    username: '',
+    email: '',
+    password: '',
+    shipList: [],
+  };
+
+  isEditing = false;
+
   constructor(private userProfileService: UserProfileService) {}
 
-  auth: Auth = inject(Auth);
-
-  userData: any = {
-    uid: 'user123', // Replace with auth UID dynamically
-    username: '',
-    email: '', // Display only
-    password: '', // Display only
-    shipList: '',
-  };
-
-  isEditing: Record<EditableFields, boolean> = {
-    username: false,
-    shipList: false,
-  };
-
-  ngOnInit() {
-    onAuthStateChanged(this.auth, (user: User | null) => {
-      if (user) {
-        this.userData.uid = user.uid;
-        this.userData.email = user.email || '';
-        this.userData.password = '**********'; // just for display
-
-        // Get profile from Firestore
-        this.userProfileService.getUserProfile(user.uid).then((profile) => {
-          if (profile) {
-            this.userData.username = profile.name;
-            this.userData.shipList = profile.likedVessels.join(', ');
-          }
-        });
-      } else {
-        // Not logged in — handle redirect or error state
+  ngOnInit(): void {
+    onAuthStateChanged(this.auth, async (user: User | null) => {
+      if (!user) {
         console.warn('User not logged in');
+        return;
+      }
+
+      this.userData.uid = user.uid;
+      this.userData.email = user.email || '';
+      this.userData.password = '**********';
+
+      const profile = await this.userProfileService.getUserProfile(user.uid);
+      if (profile) {
+        this.userData.username = profile.name;
+        this.userData.shipList = profile.likedVessels || [];
       }
     });
   }
 
-  toggleFieldEdit(field: EditableFields) {
-    Object.keys(this.isEditing).forEach((key) => {
-      this.isEditing[key as EditableFields] = key === field;
-    });
+  toggleEdit(): void {
+    this.isEditing = true;
   }
 
-  onInputChange(field: EditableFields, event: Event) {
+  saveChanges(): void {
+    const updatedProfile: UserProfile = {
+      uid: this.userData.uid,
+      name: this.userData.username,
+      companyVerified: false,
+      likedVessels: this.userData.shipList,
+    };
+
+    this.userProfileService
+      .createOrUpdateUserProfile(updatedProfile)
+      .then(() => {
+        this.isEditing = false;
+      });
+  }
+
+  onInputChange(field: EditableFields, event: Event): void {
     const input = event.target as HTMLInputElement;
     this.userData[field] = input.value;
-  }
-
-  saveField(field: EditableFields) {
-    if (field === 'username' || field === 'shipList') {
-      const updatedProfile: UserProfile = {
-        uid: this.userData.uid,
-        name: this.userData.username,
-        companyVerified: false,
-        likedVessels: this.userData.shipList
-          .split(',')
-          .map((s: string) => s.trim())
-          .filter((s: string) => !!s),
-      };
-
-      this.userProfileService
-        .createOrUpdateUserProfile(updatedProfile)
-        .then(() => {
-          this.isEditing[field] = false;
-        });
-    }
   }
 }
