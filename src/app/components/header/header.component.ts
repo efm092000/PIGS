@@ -39,6 +39,7 @@ export class HeaderComponent implements OnInit {
     });
 
     this.reloadCurrentPage();
+    this.router.navigate(['home']);
   }
 
   navigateTo(url: string) {

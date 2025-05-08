@@ -9,10 +9,11 @@ import { FaqComponent } from '../../pages/faq/faq.component';
 import { SettingsComponent } from '../../pages/settings/settings.component';
 
 export const routes: Routes = [
-  { path: '', redirectTo: '/catalog', pathMatch: 'full' },
+  { path: '', redirectTo: '/home', pathMatch: 'full' },
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
   { path: 'home', component: HomeComponent },
+  { path: 'form', component: ShipFormComponent },
   { path: 'catalog', component: CatalogComponent },
   { path: 'select', component: VesselInfoComponent },
   { path: 'faq', component: FaqComponent },

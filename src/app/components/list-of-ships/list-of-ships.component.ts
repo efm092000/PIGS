@@ -82,11 +82,18 @@ export class ListOfShipsComponent implements OnInit {
 
     let filtered = this.vessels;
 
-    // Apply liked filter if likedVesselIds is passed
-    if (this.likedVesselIds.length > 0) {
-      filtered = filtered.filter((vessel) =>
-        this.likedVesselIds.includes(vessel.id)
-      );
+    // If likedVesselIds is defined but empty, show no ships
+    if (Array.isArray(this.likedVesselIds)) {
+      if (this.likedVesselIds.length === 0) {
+        return [];
+      }
+
+      // If it's not the "show all" signal, filter liked
+      if (!this.likedVesselIds.includes('*')) {
+        filtered = filtered.filter((vessel) =>
+          this.likedVesselIds.includes(vessel.id)
+        );
+      }
     }
 
     // Apply name filter

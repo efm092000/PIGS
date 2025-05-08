@@ -37,7 +37,8 @@ export class LoginComponent {
   }
 
   goBack() {
-    this.router.navigate(['/']);
+    const returnUrl = localStorage.getItem('returnUrl') || '/dashboard';
+    this.router.navigateByUrl(returnUrl);
   }
 
   login() {
